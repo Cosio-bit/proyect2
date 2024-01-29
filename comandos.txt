@@ -1,39 +1,39 @@
 D:
-cd '.\Simon\progra\Tingeso-Mingeso\Mingeso-Tingeso-Ayudantia\Unidad 2\Aplicación-kubernetes-postgresql\'
+cd 'C:\Users\trevh\OneDrive\Escritorio\semestre 2-2023\proyect2'
 
 cd backend-config-service
 mvn clean install -DskipTests=True
-docker build -t simonsaez/topeducation-config-postgres .
-docker push simonsaez/topeducation-config-postgres
+docker build -t cosiobit/proyect2-config-postgres .
+docker push cosiobit/proyect2-config-postgres
 cd ../
 
 cd backend-eureka-service
 mvn clean install -DskipTests=True
-docker build -t simonsaez/topeducation-eureka-postgres .
-docker push simonsaez/topeducation-eureka-postgres
+docker build -t cosiobit/proyect2-eureka-postgres .
+docker push cosiobit/proyect2-eureka-postgres
 cd ../
 
 cd backend-gateway-service
 mvn clean install -DskipTests=True
-docker build -t simonsaez/topeducation-gateway-postgres .
-docker push simonsaez/topeducation-gateway-postgres
+docker build -t cosiobit/proyect2-gateway-postgres .
+docker push cosiobit/proyect2-gateway-postgres
 cd ../
 
 cd backend-estudiantes-service
 mvn clean install -DskipTests=True
-docker build -t simonsaez/topeducation-estudiantes-postgres .
-docker push simonsaez/topeducation-estudiantes-postgres
+docker build -t cosiobit/proyect2-estudiantes-postgres .
+docker push cosiobit/proyect2-estudiantes-postgres
 cd ../
 
 cd backend-cuotas-service
 mvn clean install -DskipTests=True
-docker build -t simonsaez/topeducation-cuotas-postgres .
-docker push simonsaez/topeducation-cuotas-postgres
+docker build -t cosiobit/proyect2-cuotas-postgres .
+docker push cosiobit/proyect2-cuotas-postgres
 cd ../
 
 cd frontend-service
-docker build -t simonsaez/topeducation-frontend-postgres .
-docker push simonsaez/topeducation-frontend-postgres
+docker build -t cosiobit/proyect2-frontend-postgres .
+docker push cosiobit/proyect2-frontend-postgres
 cd ../
 
 

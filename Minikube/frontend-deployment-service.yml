@@ -15,8 +15,8 @@ spec:
         app: frontend-deployment
     spec:
       containers:
-        - name: topeducation-frontend-postgres
-          image: simonsaez/topeducation-frontend-postgres:latest
+        - name: proyect2-frontend-postgres
+          image: cosiobit/proyect2-frontend-postgres:latest
           ports:
             - containerPort: 3000
 ---

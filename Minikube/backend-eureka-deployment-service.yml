@@ -15,8 +15,8 @@ spec:
         app: backend-eureka-deployment
     spec:
       containers:
-        - name: topeducation-eureka-postgres
-          image: simonsaez/topeducation-eureka-postgres:latest
+        - name: proyect2-eureka-postgres
+          image: cosiobit/proyect2-eureka-postgres:latest
           ports:
             - containerPort: 8081
           env:

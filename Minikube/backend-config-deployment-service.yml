@@ -15,8 +15,8 @@ spec:
         app: backend-config-deployment
     spec:
       containers:
-        - name: topeducation-config-postgres
-          image: simonsaez/topeducation-config-postgres:latest
+        - name: proyect2-config-postgres
+          image: cosiobit/proyect2-config-postgres:latest
           ports:
             - containerPort: 8081
 ---

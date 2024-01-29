@@ -15,8 +15,8 @@ spec:
         app: backend-cuotas-deployment
     spec:
       containers:
-        - name: topeducation-cuotas-postgres
-          image: simonsaez/topeducation-cuotas-postgres:latest
+        - name: proyect2-cuotas-postgres
+          image: cosiobit/proyect2-cuotas-postgres:latest
           ports:
             - containerPort: 8081
           env:
