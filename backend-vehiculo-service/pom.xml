@@ -9,10 +9,10 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>tingeso_mingeso</groupId>
-	<artifactId>backend-estudiantes-service</artifactId>
+	<artifactId>backend-vehiculo-service</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>backend-estudiantes-service</name>
-	<description>backend-estudiantes-service project for Spring Boot</description>
+	<name>backend-vehiculo-service</name>
+	<description>backend-vehiculo-service project for Spring Boot</description>
 	<properties>
 		<java.version>17</java.version>
 		<spring-cloud.version>2020.0.3</spring-cloud.version>
