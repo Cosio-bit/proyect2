@@ -64,16 +64,21 @@ spec:
                 secretKeyRef:
                   name: postgres-credentials
                   key: POSTGRES_PASSWORD
-            - name: POSTGRES_DB_CUOTAS
+            - name: POSTGRES_DB_VEHICULO
               valueFrom:
                 configMapKeyRef:
                   name: postgres-config-map
-                  key: POSTGRES_DB_CUOTAS
-            - name: POSTGRES_DB_ESTUDIANTES
+                  key: POSTGRES_DB_VEHICULO
+            - name: POSTGRES_DB_MARCA
               valueFrom:
                 configMapKeyRef:
                   name: postgres-config-map
-                  key: POSTGRES_DB_ESTUDIANTES
+                  key: POSTGRES_DB_MARCA
+            - name: POSTGRES_DB_REPARACION
+              valueFrom:
+                configMapKeyRef:
+                  name: postgres-config-map
+                  key: POSTGRES_DB_REPARACION
           volumeMounts:
             - mountPath: /var/lib/postgresql/data
               name: db-data

@@ -7,6 +7,8 @@ metadata:
 data:
   POSTGRES_DB_HOST: postgres
   #base de dato Cuotas
-  POSTGRES_DB_CUOTAS: proyect2cuotas
+  POSTGRES_DB_MARCA: proyect2marca
   #base de dato Estudiantes
-  POSTGRES_DB_ESTUDIANTES: proyect2estudiantes
+  POSTGRES_DB_REPARACION: proyect2reparacion
+  #base de dato Estudiantes
+  POSTGRES_DB_VEHICULO: proyect2vehiculo
