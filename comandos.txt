@@ -19,16 +19,22 @@ docker build -t cosiobit/proyect2-gateway-postgres .
 docker push cosiobit/proyect2-gateway-postgres
 cd ../
 
-cd backend-estudiantes-service
+cd backend-marca-service
 mvn clean install -DskipTests=True
-docker build -t cosiobit/proyect2-estudiantes-postgres .
-docker push cosiobit/proyect2-estudiantes-postgres
+docker build -t cosiobit/proyect2-marca-postgres .
+docker push cosiobit/proyect2-marca-postgres
 cd ../
 
-cd backend-cuotas-service
+cd backend-vehiculo-service
 mvn clean install -DskipTests=True
-docker build -t cosiobit/proyect2-cuotas-postgres .
-docker push cosiobit/proyect2-cuotas-postgres
+docker build -t cosiobit/proyect2-vehiculo-postgres .
+docker push cosiobit/proyect2-vehiculo-postgres
+cd ../
+
+cd backend-reparacion-service
+mvn clean install -DskipTests=True
+docker build -t cosiobit/proyect2-reparacion-postgres .
+docker push cosiobit/proyect2-reparacion-postgres
 cd ../
 
 cd frontend-service
@@ -54,8 +60,9 @@ kubectl apply -f postgres-dp-sv-pvc.yml
 kubectl apply -f backend-config-deployment-service.yml
 kubectl apply -f backend-eureka-deployment-service.yml
 
-kubectl apply -f backend-estudiantes-deployment-service.yml
-kubectl apply -f backend-cuotas-deployment-service.yml
+kubectl apply -f backend-marca-deployment-service.yml
+kubectl apply -f backend-vehiculo-deployment-service.yml
+kubectl apply -f backend-reparacion-deployment-service.yml
 kubectl apply -f backend-gateway-deployment-service.yml
 
 
@@ -109,8 +116,9 @@ kubectl port-forward <nombre-pod> <puerto-local>:<puerto-contenedor>
 
 kubectl exec -it <Name pods postgres> bash -- psql -h postgres -U postgres
 
-CREATE DATABASE proyect2cuotas;
-CREATE DATABASE proyect2estudiantes;
+CREATE DATABASE proyect2marca;
+CREATE DATABASE proyect2vehiculo;
+CREATE DATABASE proyect2reparacion;
 
 Para visualizar las base de datos
 \l
