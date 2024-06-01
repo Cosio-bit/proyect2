@@ -20,19 +20,19 @@ docker push cosiobit/proyect2-gateway-postgres
 cd ../
 
 cd backend-marca-service
-mvn clean install -DskipTests=True
+mvn install -DskipTests=True
 docker build -t cosiobit/proyect2-marca-postgres .
 docker push cosiobit/proyect2-marca-postgres
 cd ../
 
 cd backend-vehiculo-service
-mvn clean install -DskipTests=True
+mvn install -DskipTests=True
 docker build -t cosiobit/proyect2-vehiculo-postgres .
 docker push cosiobit/proyect2-vehiculo-postgres
 cd ../
 
 cd backend-reparacion-service
-mvn clean install -DskipTests=True
+mvn install -DskipTests=True
 docker build -t cosiobit/proyect2-reparacion-postgres .
 docker push cosiobit/proyect2-reparacion-postgres
 cd ../

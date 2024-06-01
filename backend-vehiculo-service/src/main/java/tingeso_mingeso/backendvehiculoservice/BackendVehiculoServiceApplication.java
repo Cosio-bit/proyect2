@@ -1,4 +1,4 @@
-package tingeso_mingeso.backendvehiculosservice;
+package tingeso_mingeso.backendvehiculoservice;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
