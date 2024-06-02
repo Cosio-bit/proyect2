@@ -5,7 +5,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import tingeso_mingeso.backendvehiculoservice.Entities.VehiculoEntity;
+import tingeso_mingeso.backendvehiculoservice.entity.VehiculoEntity;
 
 import java.util.List;
 import java.util.Optional;

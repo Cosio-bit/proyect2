@@ -7,7 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import tingeso_mingeso.backendreparacionservice.entity.ReparacionEntity;
-import tingeso_mingeso.backendreparacionservice.entity.VehiculoEntity;
+import tingeso_mingeso.backendreparacionservice.model.VehiculoEntity;
 import tingeso_mingeso.backendreparacionservice.repository.ReparacionRepository;
 import org.springframework.data.util.Pair;
 
@@ -27,8 +27,6 @@ public class ReparacionService {
     @Autowired
     private ReparacionRepository reparacionRepository;
 
-    @Autowired
-    private VehiculoService vehiculoService;
 
     @Autowired
     private PagoService pagoService;

@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: proyect2-reparacion-postgres
-          image: cosiobit/proyect2-reparacion-postgres:latest
+          image: cosiobit/proyect2-reparacion-postgres
           ports:
             - containerPort: 8081
           env:

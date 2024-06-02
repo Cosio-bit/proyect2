@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: proyect2-marca-postgres
-          image: cosiobit/proyect2-marca-postgres:latest
+          image: cosiobit/proyect2-marca-postgres
           ports:
             - containerPort: 8081
           env:

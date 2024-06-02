@@ -1,4 +1,4 @@
-package tingeso_mingeso.backendvehiculosservice.service;
+package tingeso_mingeso.backendvehiculoservice.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

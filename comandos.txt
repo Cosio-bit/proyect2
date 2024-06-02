@@ -89,13 +89,14 @@ kubectl delete services backend-eureka-service
 kubectl delete deployments backend-gateway-deployment
 kubectl delete services backend-gateway-service
 
-kubectl delete deployments backend-estudiantes-deployment
-kubectl delete services backend-estudiantes-service
+kubectl delete deployments backend-reparacion-deployment
+kubectl delete services backend-reparacion-service
 
-kubectl delete deployments backend-cuotas-deployment
-kubectl delete services backend-cuotas-service
+kubectl delete deployments backend-marca-deployment
+kubectl delete services backend-marca-service
 
-
+kubectl delete deployments backend-vehiculo-deployment
+kubectl delete services backend-vehiculo-service
 ---------------------------------------------------------
 
 

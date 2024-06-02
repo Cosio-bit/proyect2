@@ -2,14 +2,8 @@ package tingeso_mingeso.backendreparacionservice.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-import tingeso_mingeso.backendreparacionservice.entity.CuotasEntity;
+import org.springframework.web.bind.annotation.*;
 import tingeso_mingeso.backendreparacionservice.entity.ReparacionEntity;
-import tingeso_mingeso.backendreparacionservice.model.EstudianteEntity;
-import tingeso_mingeso.backendreparacionservice.service.CuotasService;
 import tingeso_mingeso.backendreparacionservice.service.ReparacionService;
 
 import java.util.HashMap;
@@ -74,9 +68,9 @@ public class ReparacionController {
     @PutMapping("/reparacion/monto")
     public ResponseEntity<String> updateMonto(@RequestBody ReparacionEntity reparacion) {
         // Update the total amount
-        reparacionService.updateMontoTotal(reparacion).getLeft();
+        reparacionService.updateMontoTotal(reparacion).getFirst();
         // Custom response map containing both the updated entity and a separate string
-        String additionalString = reparacionService.updateMontoTotal(reparacion).getRight();
+        String additionalString = reparacionService.updateMontoTotal(reparacion).getSecond();
         
         return ResponseEntity.ok(additionalString);
     }

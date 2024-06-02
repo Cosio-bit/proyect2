@@ -5,7 +5,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import tingeso_mingeso.backendmarcaservice.Entities.MarcaEntity;
+import tingeso_mingeso.backendmarcaservice.entity.MarcaEntity;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;

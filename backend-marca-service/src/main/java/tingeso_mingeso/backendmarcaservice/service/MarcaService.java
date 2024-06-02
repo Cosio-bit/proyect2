@@ -1,10 +1,10 @@
-package tingeso_mingeso.backendmarcasservice.service;
+package tingeso_mingeso.backendmarcaservice.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import tingeso_mingeso.backendmarcasservice.entity.MarcaEntity;
-import tingeso_mingeso.backendmarcasservice.repository.MarcaRepository;
+import tingeso_mingeso.backendmarcaservice.entity.MarcaEntity;
+import tingeso_mingeso.backendmarcaservice.repository.MarcaRepository;
 
 import java.util.ArrayList;
 import java.util.Optional;

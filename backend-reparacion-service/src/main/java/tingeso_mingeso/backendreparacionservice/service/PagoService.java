@@ -1,7 +1,9 @@
 package tingeso_mingeso.backendreparacionservice.service;
 
 import lombok.Data;
+import org.springframework.core.ParameterizedTypeReference;
 import tingeso_mingeso.backendreparacionservice.entity.ReparacionEntity;
+import tingeso_mingeso.backendreparacionservice.model.MarcaEntity;
 import tingeso_mingeso.backendreparacionservice.model.VehiculoEntity;
 import tingeso_mingeso.backendreparacionservice.repository.ReparacionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +25,8 @@ public class PagoService {
 
     @Autowired
     ReparacionRepository reparacionRepository;
+    @Autowired
+    RestTemplate restTemplate;
 
 
     // Definir una matriz de precios donde las filas representan los tipos de reparaciones
@@ -132,7 +136,7 @@ public int numeroTipoVehiculo(ReparacionEntity reparacion, VehiculoEntity vehicu
         return montoTotal;
     }
 
-    public double descuentoCantidadReparaciones(ReparacionEntity reparacion) {
+    public double descuentoCantidadReparaciones(ReparacionEntity reparacion, VehiculoEntity vehiculo) {
         int cantidadReparaciones = reparacionRepository.findByVehiculoID(reparacion.getIdVehiculo()).size();
         //print in console the cantidadReparaciones
         //si cantidad de reparaciones supera 10 entonces cantidadReparaciones = 9
@@ -140,7 +144,7 @@ public int numeroTipoVehiculo(ReparacionEntity reparacion, VehiculoEntity vehicu
             cantidadReparaciones = 9;
         }
         //obtener el NUMERO de motor del vehiculo
-        int motorNum = numeroMotor(reparacion);
+        int motorNum = numeroMotor(reparacion, vehiculo);
         return descuentosMotor[cantidadReparaciones][motorNum];
     }
 
@@ -161,7 +165,12 @@ public double descuentoMarca(ReparacionEntity reparacion, VehiculoEntity vehicul
     if (marca == null) {
         return 0;
     }
-    String url = "http://localhost:8080/api/v1/marcas/" + reparacion.getIdMarca();
+    // Obtener la fecha de ingreso de la reparación
+    int mes = reparacion.getFechaHoraIngreso().getMonth().getValue();
+    int anio = reparacion.getFechaHoraIngreso().getYear();
+    LocalDateTime fechaReparacion = LocalDateTime.of(anio, mes, 1, 0, 0);
+
+    String url = "http://localhost:8080/api/v1/marcas/" + marca;
     // Hacer la solicitud para obtener la marca
     ResponseEntity<MarcaEntity> responseEntity = restTemplate.exchange(
             url,
@@ -169,15 +178,11 @@ public double descuentoMarca(ReparacionEntity reparacion, VehiculoEntity vehicul
             null,
             new ParameterizedTypeReference<MarcaEntity>() {}
     );
+    // Obtener la marca del objeto recibido
+    MarcaEntity marcaEntity = responseEntity.getBody();
     if (marcaEntity == null) {
         return 0;
     }
-    // Obtener la marca del objeto recibido
-    MarcaEntity marcaEntity = responseEntity.getBody();
-    // Obtener la fecha de ingreso de la reparación
-    int mes = reparacion.getFechaHoraIngreso().getMonth().getValue();
-    int anio = reparacion.getFechaHoraIngreso().getYear();
-    LocalDateTime fechaReparacion = LocalDateTime.of(anio, mes, 1, 0, 0);
     return marcaEntity.getDescuento();
 }
 
@@ -185,7 +190,7 @@ public double descuentoMarca(ReparacionEntity reparacion, VehiculoEntity vehicul
 public double recargoKilometraje(ReparacionEntity reparacion, VehiculoEntity vehiculo) {
     int kilometraje = vehiculo != null ? vehiculo.getKilometraje() : 0;
     // Obtener el tipo de vehículo
-    int tipoAutoNum = numeroTipoVehiculo(reparacion);
+    int tipoAutoNum = numeroTipoVehiculo(reparacion, vehiculo);
 
     // Determinar el recargo basado en el kilometraje
     if (kilometraje <= 5000) {
@@ -209,7 +214,7 @@ public double recargoAntiguedadVehiculo(ReparacionEntity reparacion, VehiculoEnt
     // Obtener la fecha de la reparación
     int fechaReparacion = reparacion.getFechaHoraIngreso().toLocalDate().getYear();
     // Obtener el tipo de auto
-    int tipoAutoNum = numeroTipoVehiculo(reparacion);
+    int tipoAutoNum = numeroTipoVehiculo(reparacion, vehiculo);
     int diferenciaAnios = fechaReparacion - fechaFabricacion;
     // Determinar el recargo basado en la antigüedad del vehículo
     if (diferenciaAnios <= 5) {
@@ -261,7 +266,7 @@ public double recargoAntiguedadVehiculo(ReparacionEntity reparacion, VehiculoEnt
         VehiculoEntity vehiculo = responseEntity.getBody();
 
         double monto = precioReparacionVSMotor(reparacion, vehiculo);
-        double descuento = descuentoCantidadReparaciones(reparacion) + descuentoDiaAtencion(reparacion);
+        double descuento = descuentoCantidadReparaciones(reparacion,vehiculo) + descuentoDiaAtencion(reparacion);
         double recargo = recargos(reparacion, vehiculo);
         double descuentoMarca = descuentoMarca(reparacion, vehiculo);
         // Round up each calculated value to ensure it doesn't exceed the bounds of an int
