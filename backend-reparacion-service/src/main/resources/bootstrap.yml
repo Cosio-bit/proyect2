@@ -23,6 +23,6 @@ spring:
   datasource:
     plataform: postgres
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://localhost:5432/reparaciones?useSSL=false
+    url: jdbc:postgresql://localhost:5432/proyect2reparacion?useSSL=false
     username: postgres
     password: 1234
