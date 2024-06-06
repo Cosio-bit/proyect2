@@ -70,7 +70,7 @@ public class ReparacionService {
     // Función para obtener reparaciones por tipo de motor de vehículo
     public List<ReparacionEntity> obtenerReparacionesPorTipoMotor(String tipoMotor) {
         ResponseEntity<List<VehiculoEntity>> responseEntity = restTemplate.exchange(
-                "http://localhost:8080/api/v1/vehiculos/tipoMotor/" + tipoMotor,
+                "http://backend-vehiculo-service/api/v1/vehiculos/tipoMotor/" + tipoMotor,
                 HttpMethod.GET,
                 null,
                 new ParameterizedTypeReference<List<VehiculoEntity>>() {}
@@ -89,7 +89,7 @@ public class ReparacionService {
     // Función para obtener reparaciones por tipo de vehículo
     public List<ReparacionEntity> obtenerReparacionesPorTipoVehiculo(String tipoVehiculo) {
         ResponseEntity<List<VehiculoEntity>> responseEntity = restTemplate.exchange(
-                "http://localhost:8080/api/v1/vehiculos/tipoVehiculo/" + tipoVehiculo,
+                "http://backend-vehiculo-service/api/v1/vehiculos/tipoVehiculo/" + tipoVehiculo,
                 HttpMethod.GET,
                 null,
                 new ParameterizedTypeReference<List<VehiculoEntity>>() {}
@@ -108,7 +108,7 @@ public class ReparacionService {
     // Función para obtener reparaciones por marca de vehículo
     public List<ReparacionEntity> obtenerReparacionesPorMarca(String marca) {
         ResponseEntity<List<VehiculoEntity>> responseEntity = restTemplate.exchange(
-                "http://localhost:8080/api/v1/vehiculos/marca/" + marca,
+                "http://backend-vehiculo-service/api/v1/vehiculos/marca/" + marca,
                 HttpMethod.GET,
                 null,
                 new ParameterizedTypeReference<List<VehiculoEntity>>() {}

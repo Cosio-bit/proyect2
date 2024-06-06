@@ -252,7 +252,7 @@ public double recargoAntiguedadVehiculo(ReparacionEntity reparacion, VehiculoEnt
 
     public Pair<Integer, String> calcularPago(ReparacionEntity reparacion) {
         // Construir la URL para obtener el vehículo por ID
-        String url = "http://localhost:8080/api/v1/vehiculos/vehiculo" + reparacion.getIdVehiculo();
+        String url = "http://backend-marcas-service/api/v1/vehiculos/vehiculo" + reparacion.getIdVehiculo();
 
         // Hacer la solicitud para obtener el vehículo
         ResponseEntity<VehiculoEntity> responseEntity = restTemplate.exchange(
