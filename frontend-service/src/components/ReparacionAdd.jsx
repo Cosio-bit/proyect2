@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link, useParams, useNavigate } from "react-router-dom";
-import reparacionService from "../services/reparacionService.js";
+import reparacionService from "../services/reparacion.service";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import FormControl from "@mui/material/FormControl";
@@ -42,6 +42,7 @@ const AddReparacion = () => {
             id
         };
         
+        reparacionService
         Promise.all([
             reparacionService.create(reparacion) // Update repair's total amount
           ])
