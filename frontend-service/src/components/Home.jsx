@@ -3,7 +3,6 @@ import HeroSection from './HeroSection';
 import FeaturesSection from './FeaturesSection';
 import { useEffect } from 'react';
 import WebFont from 'webfontloader';
-import MyDatePicker from './DatePicker';
 
 const theme = createTheme({
   palette: {
@@ -58,7 +57,6 @@ function App() {
       }}>
         <HeroSection style={{ flex: 1 }} />
         <FeaturesSection />
-        <MyDatePicker />
 
       </div>
     </ThemeProvider>

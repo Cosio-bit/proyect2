@@ -1,6 +1,9 @@
 D:
 cd 'C:\Users\trevh\OneDrive\Escritorio\semestre 2-2023\proyect2'
 
+ls -l Dockerfile
+dos2unix Dockerfile
+
 cd backend-config-service
 mvn clean install -DskipTests=True
 docker build -t cosiobit/proyect2-config-postgres .
