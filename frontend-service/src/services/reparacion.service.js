@@ -40,4 +40,24 @@ const update = data => {
 const remove = id => {
     return httpClient.delete(`/api/v1/reparaciones/reparacion/${id}`);
 }
-export default { getAll, create, getFromVehiculo, get,getByMarca, getByTipoMotor, getByTipoVehiculo, updateMonto,  update, remove };
+
+const getAllP = () => {
+    return httpClient.get('/api/v1/precios/');
+}
+
+const createP = data => {
+    return httpClient.post("/api/v1/precios/precio", data);
+}
+
+const getP = id => {
+    return httpClient.get(`/api/v1/precios/precio/${id}`);
+}
+
+const updateP = data => {
+    return httpClient.put('/api/v1/precios/precio', data);
+}
+
+const removeP = id => {
+    return httpClient.delete(`/api/v1/precios/precio/${id}`);
+}
+export default { getAll, create, getFromVehiculo, get,getByMarca, getByTipoMotor, getByTipoVehiculo, updateMonto,  update, remove, getAllP, createP, getP, updateP, removeP};

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import precioService from "../services/precio.service";
+import reparacionService from "../services/reparacion.service";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -19,8 +19,8 @@ const PrecioList = () => {
   const navigate = useNavigate();
 
   const init = () => {
-    precioService
-      .getAll()
+    reparacionService
+      .getAllP()
       .then((response) => {
         console.log("Mostrando listado de todas los precios.", response.data);
         setPrecios(response.data);
@@ -49,8 +49,8 @@ const PrecioList = () => {
       "¿Esta seguro que desea borrar este precio?"
     );
     if (confirmDelete) {
-      precioService
-        .remove(id)
+      reparacionService
+        .removeP(id)
         .then((response) => {
           console.log("precio ha sido eliminado.", response.data);
           init();

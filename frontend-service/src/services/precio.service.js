@@ -9,14 +9,14 @@ const create = data => {
 }
 
 const get = id => {
-    return httpClient.get(`/api/v1/precio/precio/${id}`);
+    return httpClient.get(`/api/v1/precios/precio/${id}`);
 }
 
 const update = data => {
-    return httpClient.put('/api/v1/precio/precio', data);
+    return httpClient.put('/api/v1/precios/precio', data);
 }
 
 const remove = id => {
-    return httpClient.delete(`/api/v1/precio/precio/${id}`);
+    return httpClient.delete(`/api/v1/precios/precio/${id}`);
 }
 export default { getAll, create, get, update, remove };

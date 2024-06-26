@@ -4,13 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import tingeso_mingeso.backendreparacionservice.entity.PrecioEntity;
-import tingeso_mingeso.backendreparacionservice.entity.ReparacionEntity;
-import tingeso_mingeso.backendreparacionservice.model.MarcaEntity;
 import tingeso_mingeso.backendreparacionservice.service.PrecioService;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
 @RestController
