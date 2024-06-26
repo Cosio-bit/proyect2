@@ -103,7 +103,7 @@ const PrecioList = () => {
     <br /> <br />
     <Table sx={{ minWidth: 650, marginLeft: "-20px" }} size="small" aria-label="a dense table">
     <TableCell align="right" style={{ borderRight: "2px solid #CAB0F3", borderBottom: "1px solid #CAB0F3", fontWeight: "bold", fontSize: "1.1rem", color: "#9D1D7D", fontFamily: "Audiowide" }}>
-      Nombre de la Precio
+      Nombre de Reparacion
     </TableCell>
     <TableCell align="right" style={{ borderRight: "2px solid #CAB0F3", borderBottom: "1px solid #CAB0F3", fontWeight: "bold", fontSize: "1.1rem", color: "#9D1D7D", fontFamily: "Audiowide" }}>
       Precio de Diesel
