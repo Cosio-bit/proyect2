@@ -9,6 +9,8 @@ import ReparacionList from './components/ReparacionList';
 import ReparacionEdit from './components/ReparacionEdit';
 import MarcaList from './components/MarcaList';
 import MarcaAdd from './components/MarcaAdd';
+import PrecioList from './components/PrecioList';
+import PrecioAdd from './components/PrecioAdd';
 import ReparacionListMarca from './components/ReparacionListMarca';
 import ReparacionListTipoMotor from './components/ReparacionListTipoMotor';
 import ReparacionListTipoVehiculo from './components/ReparacionListTipoVehiculo';
@@ -38,6 +40,8 @@ function App() {
               <Route path="/reparacion/list/marca/:marca" element={<ReparacionListMarca/>} />
               <Route path="/reparacion/list/tipoMotor/:tipoMotor" element={<ReparacionListTipoMotor/>} />
               <Route path="/reparacion/list/tipoVehiculo/:tipoVehiculo" element={<ReparacionListTipoVehiculo/>} />
+              <Route path="/precio/list" element={<PrecioList/>} />
+              <Route path="/precio/add" element={<PrecioAdd/>} />
               
             </Routes>
           </div>
