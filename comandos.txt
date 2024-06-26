@@ -41,6 +41,7 @@ docker push cosiobit/proyect2-reparacion-postgres
 cd ../
 
 cd frontend-service
+npm run build
 docker build -t cosiobit/proyect2-frontend-postgres .
 docker push cosiobit/proyect2-frontend-postgres
 cd ../

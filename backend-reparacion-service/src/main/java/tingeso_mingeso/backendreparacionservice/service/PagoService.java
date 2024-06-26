@@ -170,7 +170,7 @@ public double descuentoMarca(ReparacionEntity reparacion, VehiculoEntity vehicul
     int anio = reparacion.getFechaHoraIngreso().getYear();
     LocalDateTime fechaReparacion = LocalDateTime.of(anio, mes, 1, 0, 0);
 
-    String url = "http://localhost:8080/api/v1/marcas/" + marca;
+    String url = "http://backend-marca-service/api/v1/marcas/" + marca;
     // Hacer la solicitud para obtener la marca
     ResponseEntity<MarcaEntity> responseEntity = restTemplate.exchange(
             url,
@@ -183,7 +183,18 @@ public double descuentoMarca(ReparacionEntity reparacion, VehiculoEntity vehicul
     if (marcaEntity == null) {
         return 0;
     }
-    return marcaEntity.getDescuento();
+    // Obtener la cantidad de bonos de la marca
+    int cantidadBonos = marcaEntity.getCantidadBonos();
+    // Obtener si es que reparaciones tiene bono
+    int bono = reparacion.getBono();
+
+    //si bono es 1 o la cantidad de bonos es mayor a 0, se aplica el descuento
+    if (bono == 1 || cantidadBonos > 0) {
+        marcaEntity.setCantidadBonos(cantidadBonos - 1);
+        restTemplate.put(url, marcaEntity);
+        return marcaEntity.getDescuento();
+    }
+    return 0;
 }
 
 
@@ -252,8 +263,7 @@ public double recargoAntiguedadVehiculo(ReparacionEntity reparacion, VehiculoEnt
 
     public Pair<Integer, String> calcularPago(ReparacionEntity reparacion) {
         // Construir la URL para obtener el vehículo por ID
-        String url = "http://backend-marcas-service/api/v1/vehiculos/vehiculo" + reparacion.getIdVehiculo();
-
+        String url = "http://backend-vehiculo-service/api/v1/vehiculos/vehiculo" + reparacion.getIdVehiculo();
         // Hacer la solicitud para obtener el vehículo
         ResponseEntity<VehiculoEntity> responseEntity = restTemplate.exchange(
                 url,
@@ -261,7 +271,6 @@ public double recargoAntiguedadVehiculo(ReparacionEntity reparacion, VehiculoEnt
                 null,
                 new ParameterizedTypeReference<VehiculoEntity>() {}
         );
-    
         // Obtener el tipo de motor del objeto recibido
         VehiculoEntity vehiculo = responseEntity.getBody();
 
@@ -271,9 +280,11 @@ public double recargoAntiguedadVehiculo(ReparacionEntity reparacion, VehiculoEnt
         double descuentoMarca = descuentoMarca(reparacion, vehiculo);
         // Round up each calculated value to ensure it doesn't exceed the bounds of an int
         double total = Math.ceil(monto - (monto * descuento) + (monto * recargo) - descuentoMarca);
+        double iva = total * 0.19;
+        double totalPagar = total + iva;
         //make a string with all the values
-        String totalPagar = "monto: " + String.valueOf(monto) + "\n descuento: " + String.valueOf(descuento*monto) + "\n recargo: " + String.valueOf(recargo*monto) + "\n descuentoMarca: " + String.valueOf(descuentoMarca) + "\n total: " + String.valueOf(total);
+        String totalPagarSTR = "monto: " + String.valueOf(monto) + "\n descuento: " + String.valueOf(descuento*monto) + "\n recargo: " + String.valueOf(recargo*monto) + "\n descuentoMarca: " + String.valueOf(descuentoMarca) + "\n total sin iva: " + String.valueOf(total) + "\n iva a pagar: " + String.valueOf(iva) + "\n total con iva: " + String.valueOf(totalPagar);
         // Convert the total to an int
-        return Pair.of((int) total, totalPagar);
+        return Pair.of((int) totalPagar, totalPagarSTR);
     }
 }

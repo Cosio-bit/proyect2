@@ -37,5 +37,8 @@ public class ReparacionEntity {
     @Column(nullable = true) // Assuming this field can be null
     private LocalDateTime fechaHoraRetiro;
 
+    @Column(nullable = true) // Assuming this field can be null
+    private int bono = 0;
+
 
 }
