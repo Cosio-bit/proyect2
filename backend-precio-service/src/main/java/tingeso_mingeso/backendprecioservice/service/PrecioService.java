@@ -28,16 +28,12 @@ public class PrecioService {
         return precioRepository.save(precio);
     }
 
-    public boolean deletePrecio(Long id) {
+    public boolean deletePrecio(Long id) throws Exception {
         try {
             precioRepository.deleteById(id);
             return true;
-        } catch (EmptyResultDataAccessException e) {
-            // Handle case when the entity with the given id doesn't exist
-            return false;
         } catch (Exception e) {
-            // Handle other exceptions if needed
-            throw new RuntimeException("Failed to delete precio with id: " + id, e);
+            throw new Exception(e.getMessage());
         }
     }
 

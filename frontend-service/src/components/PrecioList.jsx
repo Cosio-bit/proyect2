@@ -20,7 +20,7 @@ const PrecioList = () => {
 
   const init = () => {
     precioService
-      .getAllP()
+      .getAll()
       .then((response) => {
         console.log("Mostrando listado de todas los precios.", response.data);
         setPrecios(response.data);
@@ -50,7 +50,7 @@ const PrecioList = () => {
     );
     if (confirmDelete) {
       precioService
-        .removeP(id)
+        .remove(id)
         .then((response) => {
           console.log("precio ha sido eliminado.", response.data);
           init();

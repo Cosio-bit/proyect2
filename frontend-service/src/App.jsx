@@ -42,6 +42,7 @@ function App() {
               <Route path="/reparacion/list/tipoVehiculo/:tipoVehiculo" element={<ReparacionListTipoVehiculo/>} />
               <Route path="/precio/list" element={<PrecioList/>} />
               <Route path="/precio/add" element={<PrecioAdd/>} />
+              <Route path="/precio/edit/:id" element={<PrecioAdd/>} />
               
             </Routes>
           </div>

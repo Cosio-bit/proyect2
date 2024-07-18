@@ -22,30 +22,26 @@ public class PrecioController {
         return ResponseEntity.ok(precioService.obtenerPrecios());
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/precio/{id}")
     public ResponseEntity<PrecioEntity> mostrarPrecio(@PathVariable Long id) {
         Optional<PrecioEntity> precio = Optional.ofNullable(precioService.findById(id));
         return precio.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
-    @PostMapping("/")
+    @PostMapping("/precio")
     public ResponseEntity<PrecioEntity> nuevoPrecio(@RequestBody PrecioEntity precio) {
         return ResponseEntity.ok(precioService.guardarPrecio(precio));
     }
 
-    @PutMapping("/")
+    @PutMapping("/precio")
     public ResponseEntity<PrecioEntity> updatePrecio(@RequestBody PrecioEntity precio) {
         PrecioEntity precioEntity = precioService.updatePrecio(precio);
         return ResponseEntity.ok(precioEntity);
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deletePrecioById(@PathVariable Long id) {
-        boolean isDeleted = precioService.deletePrecio(id);
-        if (isDeleted) {
-            return ResponseEntity.noContent().build();
-        } else {
-            return ResponseEntity.notFound().build();
-        }
+    @DeleteMapping("/precio/{id}")
+    public ResponseEntity<Boolean> deletePrecioById(@PathVariable Long id) throws Exception {
+        var isDeleted = precioService.deletePrecio(id);
+        return ResponseEntity.noContent().build();
     }
 }
