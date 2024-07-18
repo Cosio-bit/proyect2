@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link, useParams, useNavigate } from "react-router-dom";
-import reparacionService from "../services/reparacion.service.js";
+import precioService from "../services/precio.service.js";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
@@ -57,7 +57,7 @@ const AddPrecio = () => {
     };
 
     if (id) {
-      reparacionService.updateP(precio)
+      precioService.updateP(precio)
         .then((response) => {
           console.log("precio ha sido actualizado.", response.data);
           navigate("/precio/list");
@@ -66,7 +66,7 @@ const AddPrecio = () => {
           console.log("Ha ocurrido un error al intentar actualizar datos del precio.", error);
         });
     } else {
-      reparacionService.createP(precio)
+      precioService.createP(precio)
         .then((response) => {
           console.log("precio ha sido añadido.", response.data);
           navigate("/precio/list");
@@ -85,7 +85,7 @@ const AddPrecio = () => {
     });
     if (id) {
       setTitlePrecioForm("Editar Precio");
-      reparacionService.getP(id)
+      precioService.getP(id)
         .then((precio) => {
           setTipoPrecio(precio.data.tipoPrecio);
           setPrecioDiesel(precio.data.precioDiesel);

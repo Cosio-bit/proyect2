@@ -79,6 +79,11 @@ spec:
                 configMapKeyRef:
                   name: postgres-config-map
                   key: POSTGRES_DB_REPARACION
+            - name: POSTGRES_DB_PRECIO
+              valueFrom:
+                configMapKeyRef:
+                  name: postgres-config-map
+                  key: POSTGRES_DB_PRECIO
           volumeMounts:
             - mountPath: /var/lib/postgresql/data
               name: db-data

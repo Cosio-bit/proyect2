@@ -17,43 +17,35 @@ public class PrecioController {
     @Autowired
     private PrecioService precioService;
 
-
     @GetMapping("/")
     public ResponseEntity<List<PrecioEntity>> listar() {
         return ResponseEntity.ok(precioService.obtenerPrecios());
     }
 
-    @GetMapping("/precio/{id}")
-    public ResponseEntity<Optional<PrecioEntity>> mostrarPrecio(@PathVariable Long id) {
+    @GetMapping("/{id}")
+    public ResponseEntity<PrecioEntity> mostrarPrecio(@PathVariable Long id) {
         Optional<PrecioEntity> precio = Optional.ofNullable(precioService.findById(id));
-        PrecioEntity precioEntity = precio.get();
-        return ResponseEntity.ok(Optional.of(precioEntity));
+        return precio.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
-    @PostMapping("/precio")
-    public ResponseEntity<PrecioEntity> nuevoPrecio(
-            @RequestBody PrecioEntity precio) {
+    @PostMapping("/")
+    public ResponseEntity<PrecioEntity> nuevoPrecio(@RequestBody PrecioEntity precio) {
         return ResponseEntity.ok(precioService.guardarPrecio(precio));
     }
 
-    @GetMapping("/precio")
-    public ResponseEntity<PrecioEntity> PrecioForm() {
-        return ResponseEntity.ok(new PrecioEntity());
-    }
-
-    @PutMapping("/precio")
+    @PutMapping("/")
     public ResponseEntity<PrecioEntity> updatePrecio(@RequestBody PrecioEntity precio) {
         PrecioEntity precioEntity = precioService.updatePrecio(precio);
         return ResponseEntity.ok(precioEntity);
     }
 
-    @DeleteMapping("/precio/{id}")
-    public ResponseEntity<Boolean> deletePrecioById(@PathVariable Long id) throws Exception {
-        var isDeleted = precioService.deletePrecio(id);
-        return ResponseEntity.noContent().build();
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deletePrecioById(@PathVariable Long id) {
+        boolean isDeleted = precioService.deletePrecio(id);
+        if (isDeleted) {
+            return ResponseEntity.noContent().build();
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
-
-
 }
-
-

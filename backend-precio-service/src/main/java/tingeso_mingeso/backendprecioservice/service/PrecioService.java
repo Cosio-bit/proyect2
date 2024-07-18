@@ -1,37 +1,26 @@
 package tingeso_mingeso.backendreparacionservice.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.ParameterizedTypeReference;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.ResponseEntity;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
 import tingeso_mingeso.backendreparacionservice.entity.PrecioEntity;
-import tingeso_mingeso.backendreparacionservice.model.VehiculoEntity;
 import tingeso_mingeso.backendreparacionservice.repository.PrecioRepository;
-import org.springframework.data.util.Pair;
-
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.Comparator;
 
 @Service
 public class PrecioService {
 
     @Autowired
-    private RestTemplate restTemplate;
-
-    @Autowired
     private PrecioRepository precioRepository;
 
-
-    public ArrayList<PrecioEntity> obtenerPrecios(){
-        return (ArrayList<PrecioEntity>) precioRepository.findAll();
+    public List<PrecioEntity> obtenerPrecios() {
+        return precioRepository.findAll();
     }
 
-    public PrecioEntity guardarPrecio(PrecioEntity precio){
+    public PrecioEntity guardarPrecio(PrecioEntity precio) {
         return precioRepository.save(precio);
     }
 
@@ -39,18 +28,21 @@ public class PrecioService {
         return precioRepository.save(precio);
     }
 
-    public boolean deletePrecio(Long id) throws Exception {
+    public boolean deletePrecio(Long id) {
         try {
             precioRepository.deleteById(id);
             return true;
+        } catch (EmptyResultDataAccessException e) {
+            // Handle case when the entity with the given id doesn't exist
+            return false;
         } catch (Exception e) {
-            throw new Exception(e.getMessage());
+            // Handle other exceptions if needed
+            throw new RuntimeException("Failed to delete precio with id: " + id, e);
         }
     }
 
     public PrecioEntity findById(Long precioId) {
         Optional<PrecioEntity> optionalPrecio = precioRepository.findById(precioId);
-        return optionalPrecio.orElse(null);
+        return optionalPrecio.orElse(null); // Return null if not found
     }
-
 }

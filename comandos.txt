@@ -34,6 +34,12 @@ docker build -t cosiobit/proyect2-vehiculo-postgres .
 docker push cosiobit/proyect2-vehiculo-postgres
 cd ../
 
+cd backend-precio-service
+mvn install -DskipTests=True
+docker build -t cosiobit/proyect2-precio-postgres .
+docker push cosiobit/proyect2-precio-postgres
+cd ../
+
 cd backend-reparacion-service
 mvn install -DskipTests=True
 docker build -t cosiobit/proyect2-reparacion-postgres .
@@ -66,6 +72,7 @@ kubectl apply -f backend-eureka-deployment-service.yml
 
 kubectl apply -f backend-marca-deployment-service.yml
 kubectl apply -f backend-vehiculo-deployment-service.yml
+kubectl apply -f backend-precio-deployment-service.yml
 kubectl apply -f backend-reparacion-deployment-service.yml
 kubectl apply -f backend-gateway-deployment-service.yml
 
@@ -101,6 +108,9 @@ kubectl delete services backend-marca-service
 
 kubectl delete deployments backend-vehiculo-deployment
 kubectl delete services backend-vehiculo-service
+
+kubectl delete deployments backend-precio-deployment
+kubectl delete services backend-precio-service
 ---------------------------------------------------------
 
 
@@ -123,6 +133,7 @@ kubectl exec -it <Name pods postgres> bash -- psql -h postgres -U postgres
 
 CREATE DATABASE proyect2marca;
 CREATE DATABASE proyect2vehiculo;
+CREATE DATABASE proyect2precio;
 CREATE DATABASE proyect2reparacion;
 
 Para visualizar las base de datos
