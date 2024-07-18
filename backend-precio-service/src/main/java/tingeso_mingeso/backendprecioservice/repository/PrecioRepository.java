@@ -1,10 +1,10 @@
-package tingeso_mingeso.backendreparacionservice.repository;
+package tingeso_mingeso.backendprecioservice.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
-import tingeso_mingeso.backendreparacionservice.entity.PrecioEntity;
+import tingeso_mingeso.backendprecioservice.entity.PrecioEntity;
 
 
 import java.time.LocalDateTime;

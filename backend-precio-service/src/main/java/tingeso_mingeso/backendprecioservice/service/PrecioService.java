@@ -1,10 +1,10 @@
-package tingeso_mingeso.backendreparacionservice.service;
+package tingeso_mingeso.backendprecioservice.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
-import tingeso_mingeso.backendreparacionservice.entity.PrecioEntity;
-import tingeso_mingeso.backendreparacionservice.repository.PrecioRepository;
+import tingeso_mingeso.backendprecioservice.entity.PrecioEntity;
+import tingeso_mingeso.backendprecioservice.repository.PrecioRepository;
 
 import java.util.ArrayList;
 import java.util.List;

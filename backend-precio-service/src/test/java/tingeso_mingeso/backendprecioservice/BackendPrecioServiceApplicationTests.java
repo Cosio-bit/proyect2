@@ -1,4 +1,4 @@
-package tingeso_mingeso.backendmarcaservice;
+package tingeso_mingeso.backendprecioservice;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

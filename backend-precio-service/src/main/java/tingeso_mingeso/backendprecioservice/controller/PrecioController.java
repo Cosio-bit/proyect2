@@ -1,10 +1,10 @@
-package tingeso_mingeso.backendreparacionservice.controller;
+package tingeso_mingeso.backendprecioservice.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import tingeso_mingeso.backendreparacionservice.entity.PrecioEntity;
-import tingeso_mingeso.backendreparacionservice.service.PrecioService;
+import tingeso_mingeso.backendprecioservice.entity.PrecioEntity;
+import tingeso_mingeso.backendprecioservice.service.PrecioService;
 
 import java.util.List;
 import java.util.Optional;

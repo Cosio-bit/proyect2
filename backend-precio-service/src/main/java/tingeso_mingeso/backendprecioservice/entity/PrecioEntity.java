@@ -1,4 +1,4 @@
-package tingeso_mingeso.backendreparacionservice.entity;
+package tingeso_mingeso.backendprecioservice.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
