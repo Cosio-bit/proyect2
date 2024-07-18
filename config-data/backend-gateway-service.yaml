@@ -38,3 +38,7 @@ spring:
           uri: lb://backend-vehiculos-service
           predicates:
             - Path=/vehiculos/**
+        - id: backend-precios-service
+          uri: lb://backend-precios-service
+          predicates:
+            - Path=/precios/**
