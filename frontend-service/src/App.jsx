@@ -15,6 +15,14 @@ import ReparacionListMarca from './components/ReparacionListMarca';
 import ReparacionListTipoMotor from './components/ReparacionListTipoMotor';
 import ReparacionListTipoVehiculo from './components/ReparacionListTipoVehiculo';
 import BackgroundImage from './components/BackgroundImage';
+import CantidadH1 from './components/CantidadH1';
+import MontoH1 from './components/MontoH1';
+import CantidadH2 from './components/CantidadH2';
+import PorcentajeH2 from './components/PorcentajeH2';
+import H1 from './components/H1';
+import H2 from './components/H2';
+import H3 from './components/H3';
+
 
 const retrowaveImage = `url(https://images6.alphacoders.com/121/1213573.png)`;
 const logoImage = "/src/components/logo.png";
@@ -43,6 +51,14 @@ function App() {
               <Route path="/precio/list" element={<PrecioList/>} />
               <Route path="/precio/add" element={<PrecioAdd/>} />
               <Route path="/precio/edit/:id" element={<PrecioAdd/>} />
+              <Route path="/cantidadH1" element={<CantidadH1/>} />
+              <Route path="/montoH1" element={<MontoH1/>} />
+              <Route path="/cantidadH2" element={<CantidadH2/>} />
+              <Route path="/porcentajeH2" element={<PorcentajeH2/>} />
+              <Route path="/h1" element={<H1/>} />
+              <Route path="/h2" element={<H2/>} />
+              <Route path="/h3" element={<H3/>} />
+
               
             </Routes>
           </div>

@@ -3,10 +3,8 @@ import { ThemeProvider, createTheme } from '@mui/material/styles';
 import WebFont from 'webfontloader';
 import HeroSection from './HeroSection';
 import FeaturesSection from './FeaturesSection';
-import CantidadH1 from './CantidadH1';
-import MontoH1 from './MontoH1';
-import CantidadH2 from './CantidadH2';
-import PorcentajeH2 from './PorcentajeH2';
+import H1 from './H1';
+import H2 from './H2';
 import H3 from './H3';
 
 const theme = createTheme({
@@ -60,14 +58,11 @@ function App() {
         minHeight: '100vh',
       }}>
         <HeroSection style={{ flex: 1 }} />
-        
+
         <FeaturesSection />
 
-        {/* Adding new components */}
-        <CantidadH1 />
-        <MontoH1 />
-        <CantidadH2 />
-        <PorcentajeH2 />
+        <H1 />
+        <H2 />
         <H3 />
 
       </div>

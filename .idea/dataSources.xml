@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="estudiantes" uuid="0df3fb3b-028e-48b1-925e-0dadccef1d29">
+    <data-source source="LOCAL" name="marca" uuid="0df3fb3b-028e-48b1-925e-0dadccef1d29">
       <driver-ref>postgresql</driver-ref>
       <synchronize>true</synchronize>
       <imported>true</imported>
@@ -16,7 +16,7 @@
       </jdbc-additional-properties>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
-    <data-source source="LOCAL" name="cuotas" uuid="f3b1d7c7-5038-4ad3-92b2-0185d305c955">
+    <data-source source="LOCAL" name="vehiculo" uuid="f3b1d7c7-5038-4ad3-92b2-0185d305c955">
       <driver-ref>postgresql</driver-ref>
       <synchronize>true</synchronize>
       <imported>true</imported>
