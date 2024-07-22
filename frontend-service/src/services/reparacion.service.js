@@ -41,23 +41,23 @@ const remove = id => {
     return httpClient.delete(`/api/v1/reparaciones/reparacion/${id}`);
 }
 
-const getCantidadTipoVehiculoYReparacion = (tipoVehiculo, tipoReparacion) => {
+const cantidadH1 = (tipoVehiculo, tipoReparacion) => {
     return httpClient.get(`/api/v1/reparaciones/tipoVehiculo/${tipoVehiculo}/${tipoReparacion}`);
 }
 
-const getMontoTipoVehiculoYReparacion = (tipoVehiculo, tipoReparacion) => {
+const montoH1 = (tipoVehiculo, tipoReparacion) => {
     return httpClient.get(`/api/v1/reparaciones/tipoVehiculo/${tipoVehiculo}/${tipoReparacion}/monto`);
 }
 
-const getCantidadTipoReparacionYMes = (tipoReparacion, mes) => {
+const cantidadH2 = (tipoReparacion, mes) => {
     return httpClient.get(`/api/v1/reparaciones/tipoReparacion/${tipoReparacion}/${mes}`);
 }
 
-const getPorcentajeTipoReparacionYMes = (tipoReparacion, mes) => {
+const porcentajeH2 = (tipoReparacion, mes) => {
     return httpClient.get(`/api/v1/reparaciones/tipoReparacion/${tipoReparacion}/${mes}/porcentaje`);
 }
 
-const getReparacionYVehiculo = id => {
+const h3 = id => {
     return httpClient.get(`/api/v1/reparaciones/reparacion/vehiculo/${id}`);
 }
 
@@ -73,9 +73,9 @@ export default {
     updateMonto,
     update,
     remove,
-    getCantidadTipoVehiculoYReparacion,
-    getMontoTipoVehiculoYReparacion,
-    getCantidadTipoReparacionYMes,
-    getPorcentajeTipoReparacionYMes,
-    getReparacionYVehiculo
+    cantidadH1,
+    montoH1,
+    cantidadH2,
+    porcentajeH2,
+    h3
 };

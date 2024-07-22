@@ -1,12 +1,18 @@
 import { useState, useEffect } from 'react';
-import httpClient from '../http-common';
+import reparacionService from '../services/reparacion.service';
+import TableCell from '@mui/material/TableCell';
 
 const CantidadH1 = ({ tipoVehiculo, tipoReparacion }) => {
     const [cantidad, setCantidad] = useState(null);
 
     const fetchData = async () => {
-        const response = await httpClient.getCantidadTipoVehiculoYReparacion(tipoVehiculo, tipoReparacion);
-        setCantidad(response.data);
+        try {
+            const response = await reparacionService.cantidadH1(tipoVehiculo, tipoReparacion);
+            setCantidad(response.data);
+        } catch (error) {
+            console.error(`Error fetching data for ${tipoVehiculo} and ${tipoReparacion}:`, error);
+            setCantidad('Error');
+        }
     };
 
     useEffect(() => {
@@ -14,9 +20,9 @@ const CantidadH1 = ({ tipoVehiculo, tipoReparacion }) => {
     }, [tipoVehiculo, tipoReparacion]);
 
     return (
-        <td>
+        <TableCell align="right">
             {cantidad !== null ? cantidad : 'Loading...'}
-        </td>
+        </TableCell>
     );
 };
 
