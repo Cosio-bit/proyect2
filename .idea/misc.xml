@@ -5,10 +5,12 @@
     <option name="originalFiles">
       <list>
         <option value="$PROJECT_DIR$/backend-config-service/pom.xml" />
-        <option value="$PROJECT_DIR$/backend-cuotas-service/pom.xml" />
+        <option value="$PROJECT_DIR$/backend-precio-service/pom.xml" />
         <option value="$PROJECT_DIR$/backend-eureka-service/pom.xml" />
         <option value="$PROJECT_DIR$/backend-gateway-service/pom.xml" />
-        <option value="$PROJECT_DIR$/backend-estudiantes-service/pom.xml" />
+        <option value="$PROJECT_DIR$/backend-vehiculo-service/pom.xml" />
+        <option value="$PROJECT_DIR$/backend-marca-service/pom.xml" />
+        <option value="$PROJECT_DIR$/backend-reparacion-service/pom.xml" />
       </list>
     </option>
     <option name="workspaceImportForciblyTurnedOn" value="true" />

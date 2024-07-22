@@ -40,5 +40,11 @@ public class ReparacionEntity {
     @Column(nullable = true) // Assuming this field can be null
     private int bono = 0;
 
+    @Column(nullable = true) // Assuming this field can be null
+    private int porcentaje = 0;
+
+    @Column(nullable = true) // Assuming this field can be null
+    private int montoBruto = 0;
+
 
 }

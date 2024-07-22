@@ -261,7 +261,7 @@ public double recargoAntiguedadVehiculo(ReparacionEntity reparacion, VehiculoEnt
         return recargoKilometraje(reparacion, vehiculo) + recargoAntiguedadVehiculo(reparacion, vehiculo) + recargoDiasDesdeSalida(reparacion);
     }
 
-    public Pair<Integer, String> calcularPago(ReparacionEntity reparacion) {
+    public String calcularPago(ReparacionEntity reparacion) {
         // Construir la URL para obtener el vehículo por ID
         String url = "http://backend-vehiculo-service/api/v1/vehiculos/vehiculo" + reparacion.getIdVehiculo();
         // Hacer la solicitud para obtener el vehículo
@@ -274,17 +274,27 @@ public double recargoAntiguedadVehiculo(ReparacionEntity reparacion, VehiculoEnt
         // Obtener el tipo de motor del objeto recibido
         VehiculoEntity vehiculo = responseEntity.getBody();
 
-        double monto = precioReparacionVSMotor(reparacion, vehiculo);
+        double montoBruto = precioReparacionVSMotor(reparacion, vehiculo);
+        //guardar el montobruto en la reparacion
         double descuento = descuentoCantidadReparaciones(reparacion,vehiculo) + descuentoDiaAtencion(reparacion);
         double recargo = recargos(reparacion, vehiculo);
         double descuentoMarca = descuentoMarca(reparacion, vehiculo);
+        double iva = 0.19;
         // Round up each calculated value to ensure it doesn't exceed the bounds of an int
-        double total = Math.ceil(monto - (monto * descuento) + (monto * recargo) - descuentoMarca);
-        double iva = total * 0.19;
-        double totalPagar = total + iva;
+        double total = Math.ceil(montoBruto - (montoBruto * descuento) + (montoBruto * recargo) + (montoBruto * iva) - descuentoMarca);
+        double porcentajes =  recargo + iva - descuento - descuentoMarca/montoBruto;
+        //guardar el porcentaje en la reparacion
         //make a string with all the values
-        String totalPagarSTR = "monto: " + String.valueOf(monto) + "\n descuento: " + String.valueOf(descuento*monto) + "\n recargo: " + String.valueOf(recargo*monto) + "\n descuentoMarca: " + String.valueOf(descuentoMarca) + "\n total sin iva: " + String.valueOf(total) + "\n iva a pagar: " + String.valueOf(iva) + "\n total con iva: " + String.valueOf(totalPagar);
+        String totalPagarSTR = "monto: " + String.valueOf(montoBruto) + "\n descuento: " + String.valueOf(descuento*montoBruto) + "\n recargo: " + String.valueOf(recargo*montoBruto) + "\n descuentoMarca: " + String.valueOf(descuentoMarca)  + "\n iva a pagar: " + String.valueOf(iva*montoBruto) + "\n total con iva: " + String.valueOf(total);
         // Convert the total to an int
-        return Pair.of((int) totalPagar, totalPagarSTR);
+        reparacion.setPorcentaje((int) porcentajes);
+        reparacion.setMontoBruto((int) montoBruto);
+        reparacion.setMontoTotal((int) total);
+        reparacionRepository.save(reparacion);
+        return totalPagarSTR;
     }
+
+
+
+    
 }

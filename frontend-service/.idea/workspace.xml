@@ -11,6 +11,9 @@
       <change beforePath="$PROJECT_DIR$/src/components/ReparacionAdd.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ReparacionAdd.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/ReparacionEdit.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ReparacionEdit.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/VehiculoList.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/VehiculoList.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/PrecioAdd.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/PrecioAdd.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/PrecioList.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/PrecioList.jsx" afterDir="false" />
+      
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

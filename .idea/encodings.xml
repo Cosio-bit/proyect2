@@ -3,8 +3,14 @@
   <component name="Encoding">
     <file url="file://$PROJECT_DIR$/backend-config-service/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/backend-config-service/src/main/resources" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/backend-cuotas-service/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/backend-estudiantes-service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/backend-precio-service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/backend-precio-service/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/backend-marca-service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/backend-marca-service/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/backend-reparacion-service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/backend-reparacion-service/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/backend-vehiculo-service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/backend-vehiculo-service/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/backend-eureka-service/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/backend-eureka-service/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/backend-gateway-service/src/main/java" charset="UTF-8" />

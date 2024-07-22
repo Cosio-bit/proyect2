@@ -9,20 +9,31 @@
         <module name="backend-eureka-service" />
         <module name="backend-config-service" />
         <module name="backend-gateway-service" />
+        <module name="backend-precio-service" />
+        <module name="backend-vehiculo-service" />
+        <module name="backend-marca-service" />
+        <module name="backend-reparacion-service" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="backend-cuotas-service" target="17" />
-      <module name="backend-estudiantes-service" target="17" />
+      <module name="backend-eureka-service" target="JDK_17" />
+      <module name="backend-config-service" target="JDK_17" />
+      <module name="backend-gateway-service" target="JDK_17" />
+      <module name="backend-precio-service" target="JDK_17" />
+      <module name="backend-vehiculo-service" target="JDK_17" />
+      <module name="backend-marca-service" target="JDK_17" />
+      <module name="backend-reparacion-service" target="JDK_17" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
-      <module name="backend-config-service" options="-parameters" />
-      <module name="backend-cuotas-service" options="-parameters" />
-      <module name="backend-estudiantes-service" options="-parameters" />
       <module name="backend-eureka-service" options="-parameters" />
+      <module name="backend-config-service" options="-parameters" />
       <module name="backend-gateway-service" options="-parameters" />
+      <module name="backend-precio-service" options="-parameters" />
+      <module name="backend-vehiculo-service" options="-parameters" />
+      <module name="backend-marca-service" options="-parameters" />
+      <module name="backend-reparacion-service" options="-parameters" />
     </option>
   </component>
 </project>

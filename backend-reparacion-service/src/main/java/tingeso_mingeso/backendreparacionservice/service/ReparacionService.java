@@ -62,9 +62,7 @@ public class ReparacionService {
     }
 
     public Pair<ReparacionEntity, String> updateMontoTotal(ReparacionEntity reparacion){
-        reparacion.setMontoTotal(pagoService.calcularPago(reparacion).getFirst());
-        String stringInfo = String.valueOf(pagoService.calcularPago(reparacion).getSecond());
-        reparacionRepository.save(reparacion);
+        String stringInfo = String.valueOf(pagoService.calcularPago(reparacion));
         return Pair.of(reparacion, stringInfo);
     }
     // Función para obtener reparaciones por tipo de motor de vehículo
@@ -146,6 +144,100 @@ public class ReparacionService {
 
         return reparaciones;
     }
-    
+
+    public int obtenerCantidadReparacionesPorTipoVehiculoYReparacion(String tipoVehiculo, String tipoReparacion) {
+        // Obtener reparaciones por tipo de vehículo
+        List<ReparacionEntity> reparacionesTipoVehiculo = obtenerReparacionesPorTipoVehiculo(tipoVehiculo);
+        // Contar reparaciones por tipo de reparación
+        int cantidadTipoReparacion = 0;
+        for (ReparacionEntity reparacion : reparacionesTipoVehiculo) {
+            //Tipo reparacion es una string que contiene los tipos de reparaciones, revisar si contiene el tipo de reparacion
+            if (reparacion.getTipoReparacion().contains(tipoReparacion)) {
+                cantidadTipoReparacion++;
+            }
+        }
+        return cantidadTipoReparacion;
+
     }
+
+    public double obtenerMontoReparacionesPorTipoVehiculoYReparacion(String tipoVehiculo, String tipoReparacion) {
+        List<ReparacionEntity> reparacionesTipoVehiculo = obtenerReparacionesPorTipoVehiculo(tipoVehiculo);
+        double montoTotal = 0;
+        //parse tipoReparacion a integer
+        int intTipo = Integer.parseInt(tipoReparacion);
+        for (ReparacionEntity reparacion : reparacionesTipoVehiculo) {
+            if (reparacion.getTipoReparacion().contains(tipoReparacion)) {
+                //obtener el vehiculo a partir de la reparacion para obtener los precios que estan ligados al motor
+                ResponseEntity<VehiculoEntity> responseEntity = restTemplate.exchange(
+                        "http://backend-vehiculo-service/api/v1/vehiculos/" + reparacion.getIdVehiculo(),
+                        HttpMethod.GET,
+                        null,
+                        new ParameterizedTypeReference<VehiculoEntity>() {}
+                );
+                VehiculoEntity vehiculo = responseEntity.getBody();
+                int intMotor = pagoService.numeroMotor(reparacion, vehiculo);
+                int porcentaje = reparacion.getPorcentaje();
+                montoTotal = pagoService.preciosMotor[intTipo][intMotor] * porcentaje;
+            }
+            
+        }
+        return montoTotal;
+    }
+
+    //obtener cantidad de reparaciones por tipo de reparacion y mes
+    public int obtenerCantidadReparacionesPorTipoReparacionYMes(String tipoReparacion, int mes) {
+        List<ReparacionEntity> reparaciones = obtenerReparaciones();
+        int cantidadTipoReparacion = 0;
+        for (ReparacionEntity reparacion : reparaciones) {
+            if (reparacion.getTipoReparacion().contains(tipoReparacion) && reparacion.getFechaHoraIngreso().getMonthValue() == mes) {
+                cantidadTipoReparacion++;
+            }
+        }
+        return cantidadTipoReparacion;
+    }
+
+    // obtener cantidad de reparaciones por tipo de reparacion y mes, luego, obtener cantidad de reparaciones de los dos meses anteriores
+    public List<Integer> obtenerCantidadReparacionesPorTipoReparacionYMesYDosMesesAnteriores(String tipoReparacion, int mes) {
+        int cantidadTipoReparacion = obtenerCantidadReparacionesPorTipoReparacionYMes(tipoReparacion, mes);
+        int cantidadTipoReparacionMesAnterior = obtenerCantidadReparacionesPorTipoReparacionYMes(tipoReparacion, mes - 1);
+        int cantidadTipoReparacionDosMesesAnteriores = obtenerCantidadReparacionesPorTipoReparacionYMes(tipoReparacion, mes - 2);
+        return List.of(cantidadTipoReparacion, cantidadTipoReparacionMesAnterior, cantidadTipoReparacionDosMesesAnteriores);
+    }
+
+    //comparar la variacion porcentual entre un mes vs el mes anterior y un mes vs dos meses anteriores
+    public List<Double> obtenerVariacionPorcentualReparacionesPorTipoReparacionYMesYDosMesesAnteriores(String tipoReparacion, int mes) {
+        int cantidadTipoReparacion = obtenerCantidadReparacionesPorTipoReparacionYMes(tipoReparacion, mes);
+        int cantidadTipoReparacionMesAnterior = obtenerCantidadReparacionesPorTipoReparacionYMes(tipoReparacion, mes - 1);
+        int cantidadTipoReparacionDosMesesAnteriores = obtenerCantidadReparacionesPorTipoReparacionYMes(tipoReparacion, mes - 2);
+        double variacionPorcentualMesAnterior = 0;
+        double variacionPorcentualDosMesesAnteriores = 0;
+        if (cantidadTipoReparacionMesAnterior != 0) {
+            variacionPorcentualMesAnterior = ((double) cantidadTipoReparacion - cantidadTipoReparacionMesAnterior) / cantidadTipoReparacionMesAnterior * 100;
+        }
+        if (cantidadTipoReparacionDosMesesAnteriores != 0) {
+            variacionPorcentualDosMesesAnteriores = ((double) cantidadTipoReparacion - cantidadTipoReparacionDosMesesAnteriores) / cantidadTipoReparacionDosMesesAnteriores * 100;
+        }
+        return List.of(variacionPorcentualMesAnterior, variacionPorcentualDosMesesAnteriores);
+    }
+
+
+    //obtener desde una reparacion, el vehiculo
+    public VehiculoEntity obtenerVehiculoDeReparacion(ReparacionEntity reparacion){
+        ResponseEntity<VehiculoEntity> responseEntity = restTemplate.exchange(
+                "http://backend-vehiculo-service/api/v1/vehiculos/" + reparacion.getIdVehiculo(),
+                HttpMethod.GET,
+                null,
+                new ParameterizedTypeReference<VehiculoEntity>() {}
+        );
+        return responseEntity.getBody();
+    }
+
+    //desde una reparacion, devolver vehiculo y reparacion
+    public List<Object> obtenerReparacionYVehiculo(Long id){
+        ReparacionEntity reparacion = findById(id);
+        VehiculoEntity vehiculo = obtenerVehiculoDeReparacion(reparacion);
+        return List.of(reparacion, vehiculo);
+    }
+
     
+}

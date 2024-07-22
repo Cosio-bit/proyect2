@@ -6,9 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import tingeso_mingeso.backendreparacionservice.entity.ReparacionEntity;
 import tingeso_mingeso.backendreparacionservice.service.ReparacionService;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -42,11 +40,43 @@ public class ReparacionController {
         return ResponseEntity.ok(reparacionService.obtenerReparacionesPorTipoVehiculo(tipoVehiculo));
     }
 
+    //obtener cantidad de reparaciones de un tipo de vehiculo y un tipo de reparacion
+    @GetMapping("/tipoVehiculo/{tipoVehiculo}/{tipoReparacion}")
+    public ResponseEntity<Integer> CantidadTipoVehiculoYReparacion(@PathVariable("tipoVehiculo") String tipoVehiculo, @RequestParam(value = "tipoReparacion") String tipoReparacion) {
+        return ResponseEntity.ok(reparacionService.obtenerCantidadReparacionesPorTipoVehiculoYReparacion(tipoVehiculo, tipoReparacion));
+    }
+
+    //obtener monto total de reparaciones de un tipo de vehiculo y un tipo de reparacion
+    @GetMapping("/tipoVehiculo/{tipoVehiculo}/{tipoReparacion}/monto")
+    public ResponseEntity<Double> MontoTipoVehiculoYReparacion(@PathVariable("tipoVehiculo") String tipoVehiculo, @RequestParam(value = "tipoVehiculo") String tipoReparacion) {
+        return ResponseEntity.ok(reparacionService.obtenerMontoReparacionesPorTipoVehiculoYReparacion(tipoVehiculo, tipoReparacion));
+    }
+
+    //obtener las reparaciones de un tipo de reparacion, de un mes especifico y sus dos anteriores
+    @GetMapping("/tipoReparacion/{tipoReparacion}/{mes}")
+    public ResponseEntity<List<Integer>> CantidadTipoReparacionYMes(@PathVariable("tipoReparacion") String tipoReparacion, @PathVariable("mes") int mes) {
+        return ResponseEntity.ok(reparacionService.obtenerCantidadReparacionesPorTipoReparacionYMesYDosMesesAnteriores(tipoReparacion, mes));
+    }
+
+    //obtener las reparaciones de un tipo de reparacion, de un mes especifico y sus dos anteriores
+    @GetMapping("/tipoReparacion/{tipoReparacion}/{mes}/porcentaje")
+    public ResponseEntity<List<Double>> PorcentajeTipoReparacionYMes(@PathVariable("tipoReparacion") String tipoReparacion, @PathVariable("mes") int mes) {
+        return ResponseEntity.ok(reparacionService.obtenerVariacionPorcentualReparacionesPorTipoReparacionYMesYDosMesesAnteriores(tipoReparacion, mes));
+    }
+
+    // desde el id de reparacion obtener la reparacion y el vehiculo
+    @GetMapping("/reparacion/vehiculo/{id}")
+    public ResponseEntity<List<Object>> ReparacionYVehiculo(@PathVariable Long id) {
+        return ResponseEntity.ok(reparacionService.obtenerReparacionYVehiculo(id));
+
+    }
+
     //obtener todas las reparaciones de un tipo de motor
     @GetMapping("/tipoMotor/{tipoMotor}")
     public ResponseEntity<List<ReparacionEntity>> mostrarReparacionesPorTipoMotor(@PathVariable("tipoMotor") String tipoMotor) {
         return ResponseEntity.ok(reparacionService.obtenerReparacionesPorTipoMotor(tipoMotor));
     }
+
 
     @GetMapping("/reparacion/{id}")
     public ResponseEntity<Optional<ReparacionEntity>> mostrarReparacion(@PathVariable Long id) {
