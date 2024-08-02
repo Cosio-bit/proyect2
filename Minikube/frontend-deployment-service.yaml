@@ -15,8 +15,8 @@ spec:
         app: frontend-deployment
     spec:
       containers:
-        - name: proyect2-frontend-postgres
-          image: cosiobit/proyect2-frontend-postgres:latest
+        - name: frontend-postgres
+          image: cosiobit/frontend-postgres:latest
           ports:
             - containerPort: 3000
 ---

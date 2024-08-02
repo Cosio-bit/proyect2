@@ -1,17 +1,13 @@
 package tingeso_mingeso.backendvehiculoservice.entity;
+import jakarta.persistence.*;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
-import javax.persistence.*;
-
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
-@Table(name = "vehiculos")
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
+@Table(name = "reparaciones")
+@Getter
+@Setter
 public class VehiculoEntity {
 
     @Id

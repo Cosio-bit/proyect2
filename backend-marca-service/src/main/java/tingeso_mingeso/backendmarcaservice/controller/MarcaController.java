@@ -7,8 +7,6 @@ import org.springframework.web.bind.annotation.*;
 import tingeso_mingeso.backendmarcaservice.entity.MarcaEntity;
 import tingeso_mingeso.backendmarcaservice.service.MarcaService;
 
-import org.springframework.web.multipart.MultipartFile;
-import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 

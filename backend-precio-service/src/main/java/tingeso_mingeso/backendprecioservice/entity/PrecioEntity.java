@@ -1,18 +1,15 @@
 package tingeso_mingeso.backendprecioservice.entity;
+import jakarta.persistence.*;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
-import javax.persistence.*;
-import javax.validation.constraints.NotNull;
-
-import java.time.LocalDateTime;
+import lombok.Setter;
 
 @Entity
 @Table(name = "precios")
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
-@AllArgsConstructor
 public class PrecioEntity {
 
     @Id
