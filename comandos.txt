@@ -6,50 +6,50 @@ dos2unix Dockerfile
 
 cd backend-config-service
 mvn clean install -DskipTests=True
-docker build -t cosiobit/proyect2-config-postgres .
-docker push cosiobit/proyect2-config-postgres
+docker build -t cosiobit/backend-config-server .
+docker push cosiobit/backend-config-server
 cd ../
 
 cd backend-eureka-service
 mvn clean install -DskipTests=True
-docker build -t cosiobit/proyect2-eureka-postgres .
-docker push cosiobit/proyect2-eureka-postgres
+docker build -t cosiobit/backend-eureka-server .
+docker push cosiobit/backend-eureka-server
 cd ../
 
 cd backend-gateway-service
 mvn clean install -DskipTests=True
-docker build -t cosiobit/proyect2-gateway-postgres .
-docker push cosiobit/proyect2-gateway-postgres
+docker build -t cosiobit/backend-gateway-service .
+docker push cosiobit/backend-gateway-service
 cd ../
 
 cd backend-marca-service
 mvn install -DskipTests=True
-docker build -t cosiobit/proyect2-marca-postgres .
-docker push cosiobit/proyect2-marca-postgres
+docker build -t cosiobit/backend-marca-service .
+docker push cosiobit/backend-marca-service
 cd ../
 
 cd backend-vehiculo-service
 mvn install -DskipTests=True
-docker build -t cosiobit/proyect2-vehiculo-postgres .
-docker push cosiobit/proyect2-vehiculo-postgres
+docker build -t cosiobit/backend-vehiculo-service .
+docker push cosiobit/backend-vehiculo-service
 cd ../
 
 cd backend-precio-service
 mvn install -DskipTests=True
-docker build -t cosiobit/proyect2-precio-postgres .
-docker push cosiobit/proyect2-precio-postgres
+docker build -t cosiobit/backend-precio-service .
+docker push cosiobit/backend-precio-service
 cd ../
 
 cd backend-reparacion-service
 mvn install -DskipTests=True
-docker build -t cosiobit/proyect2-reparacion-postgres .
-docker push cosiobit/proyect2-reparacion-postgres
+docker build -t cosiobit/backend-reparacion-service .
+docker push cosiobit/backend-reparacion-service
 cd ../
 
 cd frontend-service
 npm run build
-docker build -t cosiobit/proyect2-frontend-postgres .
-docker push cosiobit/proyect2-frontend-postgres
+docker build -t cosiobit/frontend-service .
+docker push cosiobit/frontend-service
 cd ../
 
 
@@ -59,13 +59,17 @@ cd ../
 minikube start
 minikube status
 
-cd Minikube
+cd deployment
 
 kubectl apply -f frontend-deployment-service.yml
 
 kubectl apply -f postgres-secrets.yml
 kubectl apply -f postgres-configmap.yml
-kubectl apply -f postgres-dp-sv-pvc.yml
+
+kubectl apply -f backend-marca-db-deployment-service.yml
+kubectl apply -f backend-vehiculo-db-deployment-service.yml
+kubectl apply -f backend-precio-db-deployment-service.yml
+kubectl apply -f backend-reparacion-db-deployment-service.yml
 
 kubectl apply -f backend-config-deployment-service.yml
 kubectl apply -f backend-eureka-deployment-service.yml
@@ -74,6 +78,7 @@ kubectl apply -f backend-marca-deployment-service.yml
 kubectl apply -f backend-vehiculo-deployment-service.yml
 kubectl apply -f backend-precio-deployment-service.yml
 kubectl apply -f backend-reparacion-deployment-service.yml
+
 kubectl apply -f backend-gateway-deployment-service.yml
 
 
