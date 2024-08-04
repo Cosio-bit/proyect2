@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-@FeignClient(value = "backend-vehiculo-service",
+@FeignClient(value = "vehiculo",
         path = "/api/v1/vehiculos"
         )
 public interface VehiculoFeignClient {

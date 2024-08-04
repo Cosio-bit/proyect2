@@ -5,7 +5,6 @@
       <driver-ref>postgresql</driver-ref>
       <synchronize>true</synchronize>
       <imported>true</imported>
-      <remarks>$PROJECT_DIR$/backend-estudiantes-service/src/main/resources/bootstrap.yml</remarks>
       <jdbc-driver>org.postgresql.Driver</jdbc-driver>
       <jdbc-url>jdbc:postgresql://localhost:5432/estudiantes?useSSL=false</jdbc-url>
       <jdbc-additional-properties>
@@ -20,7 +19,6 @@
       <driver-ref>postgresql</driver-ref>
       <synchronize>true</synchronize>
       <imported>true</imported>
-      <remarks>$PROJECT_DIR$/backend-cuotas-service/src/main/resources/bootstrap.yml</remarks>
       <jdbc-driver>org.postgresql.Driver</jdbc-driver>
       <jdbc-url>jdbc:postgresql://localhost:5432/cuotas?useSSL=false</jdbc-url>
       <jdbc-additional-properties>

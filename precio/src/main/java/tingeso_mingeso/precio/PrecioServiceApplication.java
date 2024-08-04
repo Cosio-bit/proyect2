@@ -1,4 +1,4 @@
-package tingeso_mingeso.marca;
+package tingeso_mingeso.precio;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -6,10 +6,10 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 
 @SpringBootApplication
 @EnableFeignClients
-public class BackendMarcaServiceApplication {
+public class PrecioServiceApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(BackendMarcaServiceApplication.class, args);
+		SpringApplication.run(PrecioServiceApplication.class, args);
 	}
 
 }

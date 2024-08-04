@@ -11,7 +11,7 @@ import tingeso_mingeso.reparacion.model.MarcaEntity;
 import java.util.ArrayList;
 import java.util.Optional;
 
-@FeignClient(value = "backend-marca-service",
+@FeignClient(value = "marca",
         path = "/api/v1/marcas"
         )
 public interface MarcaFeignClient {

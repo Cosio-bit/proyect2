@@ -1,10 +1,10 @@
-package tingeso_mingeso.backendvehiculoservice;
+package tingeso_mingeso.precio;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class BackendVehiculoServiceApplicationTests {
+class PrecioServiceApplicationTests {
 
 
 }

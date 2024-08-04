@@ -6,10 +6,10 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 
 @SpringBootApplication
 @EnableFeignClients
-public class BackendVehiculoServiceApplication {
+public class VehiculoServiceApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(BackendVehiculoServiceApplication.class, args);
+		SpringApplication.run(VehiculoServiceApplication.class, args);
 	}
 
 }

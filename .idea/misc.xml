@@ -4,13 +4,13 @@
   <component name="MavenProjectsManager">
     <option name="originalFiles">
       <list>
-        <option value="$PROJECT_DIR$/backend-config-service/pom.xml" />
-        <option value="$PROJECT_DIR$/backend-precio-service/pom.xml" />
-        <option value="$PROJECT_DIR$/backend-eureka-service/pom.xml" />
-        <option value="$PROJECT_DIR$/backend-gateway-service/pom.xml" />
-        <option value="$PROJECT_DIR$/backend-vehiculo-service/pom.xml" />
-        <option value="$PROJECT_DIR$/backend-marca-service/pom.xml" />
-        <option value="$PROJECT_DIR$/backend-reparacion-service/pom.xml" />
+        <option value="$PROJECT_DIR$/config-server/pom.xml" />
+        <option value="$PROJECT_DIR$/precio/pom.xml" />
+        <option value="$PROJECT_DIR$/eureka-server/pom.xml" />
+        <option value="$PROJECT_DIR$/gateway-server/pom.xml" />
+        <option value="$PROJECT_DIR$/vehiculo/pom.xml" />
+        <option value="$PROJECT_DIR$/marca/pom.xml" />
+        <option value="$PROJECT_DIR$/reparacion/pom.xml" />
       </list>
     </option>
     <option name="workspaceImportForciblyTurnedOn" value="true" />

@@ -56,10 +56,6 @@ cd ../
 ---------------------------------------------------------
 
 
-minikube start
-minikube status
-
-cd deployment
 
 kubectl apply -f frontend-deployment-service.yaml
 

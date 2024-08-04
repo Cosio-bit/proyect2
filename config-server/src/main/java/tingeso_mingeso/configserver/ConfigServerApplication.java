@@ -1,4 +1,4 @@
-package tingeso_mingeso.backendconfigservice;
+package tingeso_mingeso.configserver;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
