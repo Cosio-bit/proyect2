@@ -6,6 +6,9 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+
+import tingeso_mingeso.backendreparacionservice.clients.MarcaFeignClient;
+import tingeso_mingeso.backendreparacionservice.clients.VehiculoFeignClient;
 import tingeso_mingeso.backendreparacionservice.entity.ReparacionEntity;
 import tingeso_mingeso.backendreparacionservice.model.VehiculoEntity;
 import tingeso_mingeso.backendreparacionservice.repository.ReparacionRepository;
@@ -26,9 +29,11 @@ public class ReparacionService {
     @Autowired
     private ReparacionRepository reparacionRepository;
 
-
     @Autowired
     private PagoService pagoService;
+
+    MarcaFeignClient  marcaFeignClient;
+    VehiculoFeignClient vehiculoFeignClient;
 
 
     public ArrayList<ReparacionEntity> obtenerReparaciones(){
@@ -65,16 +70,17 @@ public class ReparacionService {
         String stringInfo = String.valueOf(pagoService.calcularPago(reparacion));
         return Pair.of(reparacion, stringInfo);
     }
+
     // Función para obtener reparaciones por tipo de motor de vehículo
     public List<ReparacionEntity> obtenerReparacionesPorTipoMotor(String tipoMotor) {
-        ResponseEntity<List<VehiculoEntity>> responseEntity = restTemplate.exchange(
-                "http://backend-vehiculo-service/api/v1/vehiculos/tipoMotor/" + tipoMotor,
-                HttpMethod.GET,
-                null,
-                new ParameterizedTypeReference<List<VehiculoEntity>>() {}
-        );
+        // ResponseEntity<List<VehiculoEntity>> responseEntity = restTemplate.exchange(
+        //         "http://backend-vehiculo-service/api/v1/vehiculos/tipoMotor/" + tipoMotor,
+        //         HttpMethod.GET,
+        //         null,
+        //         new ParameterizedTypeReference<List<VehiculoEntity>>() {}
+        // );
 
-        List<VehiculoEntity> vehiculos = responseEntity.getBody();
+        List<VehiculoEntity> vehiculos = vehiculoFeignClient.mostrarVehiculosPorTipoMotor(tipoMotor);
         List<ReparacionEntity> reparaciones = new ArrayList<>();
         if (vehiculos != null) {
             for (VehiculoEntity vehiculo : vehiculos) {
@@ -86,14 +92,14 @@ public class ReparacionService {
 
     // Función para obtener reparaciones por tipo de vehículo
     public List<ReparacionEntity> obtenerReparacionesPorTipoVehiculo(String tipoVehiculo) {
-        ResponseEntity<List<VehiculoEntity>> responseEntity = restTemplate.exchange(
-                "http://backend-vehiculo-service/api/v1/vehiculos/tipoVehiculo/" + tipoVehiculo,
-                HttpMethod.GET,
-                null,
-                new ParameterizedTypeReference<List<VehiculoEntity>>() {}
-        );
+        // ResponseEntity<List<VehiculoEntity>> responseEntity = restTemplate.exchange(
+        //         "http://backend-vehiculo-service/api/v1/vehiculos/tipoVehiculo/" + tipoVehiculo,
+        //         HttpMethod.GET,
+        //         null,
+        //         new ParameterizedTypeReference<List<VehiculoEntity>>() {}
+        // );
 
-        List<VehiculoEntity> vehiculos = responseEntity.getBody();
+        List<VehiculoEntity> vehiculos = vehiculoFeignClient.mostrarVehiculosPorTipoVehiculo(tipoVehiculo);
         List<ReparacionEntity> reparaciones = new ArrayList<>();
         if (vehiculos != null) {
             for (VehiculoEntity vehiculo : vehiculos) {
@@ -105,14 +111,14 @@ public class ReparacionService {
 
     // Función para obtener reparaciones por marca de vehículo
     public List<ReparacionEntity> obtenerReparacionesPorMarca(String marca) {
-        ResponseEntity<List<VehiculoEntity>> responseEntity = restTemplate.exchange(
-                "http://backend-vehiculo-service/api/v1/vehiculos/marca/" + marca,
-                HttpMethod.GET,
-                null,
-                new ParameterizedTypeReference<List<VehiculoEntity>>() {}
-        );
+        // ResponseEntity<List<VehiculoEntity>> responseEntity = restTemplate.exchange(
+        //         "http://backend-vehiculo-service/api/v1/vehiculos/marca/" + marca,
+        //         HttpMethod.GET,
+        //         null,
+        //         new ParameterizedTypeReference<List<VehiculoEntity>>() {}
+        // );
 
-        List<VehiculoEntity> vehiculos = responseEntity.getBody();
+        List<VehiculoEntity> vehiculos = vehiculoFeignClient.mostrarVehiculosPorMarca(marca);
         List<ReparacionEntity> reparaciones = new ArrayList<>();
         if (vehiculos != null) {
             for (VehiculoEntity vehiculo : vehiculos) {
@@ -168,13 +174,15 @@ public class ReparacionService {
         for (ReparacionEntity reparacion : reparacionesTipoVehiculo) {
             if (reparacion.getTipoReparacion().contains(tipoReparacion)) {
                 //obtener el vehiculo a partir de la reparacion para obtener los precios que estan ligados al motor
-                ResponseEntity<VehiculoEntity> responseEntity = restTemplate.exchange(
-                        "http://backend-vehiculo-service/api/v1/vehiculos/" + reparacion.getIdVehiculo(),
-                        HttpMethod.GET,
-                        null,
-                        new ParameterizedTypeReference<VehiculoEntity>() {}
-                );
-                VehiculoEntity vehiculo = responseEntity.getBody();
+                // ResponseEntity<VehiculoEntity> responseEntity = restTemplate.exchange(
+                //         "http://backend-vehiculo-service/api/v1/vehiculos/" + reparacion.getIdVehiculo(),
+                //         HttpMethod.GET,
+                //         null,
+                //         new ParameterizedTypeReference<VehiculoEntity>() {}
+                // );
+                //from string to long
+                Long idVehiculo = Long.parseLong(reparacion.getIdVehiculo());
+                VehiculoEntity vehiculo = vehiculoFeignClient.mostrarVehiculo(idVehiculo).get();
                 int intMotor = pagoService.numeroMotor(reparacion, vehiculo);
                 int porcentaje = reparacion.getPorcentaje();
                 montoTotal = pagoService.preciosMotor[intTipo][intMotor] * porcentaje;
@@ -223,13 +231,14 @@ public class ReparacionService {
 
     //obtener desde una reparacion, el vehiculo
     public VehiculoEntity obtenerVehiculoDeReparacion(ReparacionEntity reparacion){
-        ResponseEntity<VehiculoEntity> responseEntity = restTemplate.exchange(
-                "http://backend-vehiculo-service/api/v1/vehiculos/" + reparacion.getIdVehiculo(),
-                HttpMethod.GET,
-                null,
-                new ParameterizedTypeReference<VehiculoEntity>() {}
-        );
-        return responseEntity.getBody();
+    // ResponseEntity<VehiculoEntity> responseEntity = restTemplate.exchange(
+    //         "http://backend-vehiculo-service/api/v1/vehiculos/" + reparacion.getIdVehiculo(),
+    //         HttpMethod.GET,
+    //         null,
+    //         new ParameterizedTypeReference<VehiculoEntity>() {}
+    // );
+        Long idVehiculo = Long.parseLong(reparacion.getIdVehiculo());
+        return vehiculoFeignClient.mostrarVehiculo(idVehiculo).get();
     }
 
     //desde una reparacion, devolver vehiculo y reparacion

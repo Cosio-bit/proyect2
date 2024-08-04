@@ -2,6 +2,9 @@ package tingeso_mingeso.backendreparacionservice.service;
 
 import lombok.Data;
 import org.springframework.core.ParameterizedTypeReference;
+
+import tingeso_mingeso.backendreparacionservice.clients.MarcaFeignClient;
+import tingeso_mingeso.backendreparacionservice.clients.VehiculoFeignClient;
 import tingeso_mingeso.backendreparacionservice.entity.ReparacionEntity;
 import tingeso_mingeso.backendreparacionservice.model.MarcaEntity;
 import tingeso_mingeso.backendreparacionservice.model.VehiculoEntity;
@@ -27,6 +30,9 @@ public class PagoService {
     ReparacionRepository reparacionRepository;
     @Autowired
     RestTemplate restTemplate;
+
+    MarcaFeignClient marcaFeignClient;
+    VehiculoFeignClient vehiculoFeignClient;
 
 
     // Definir una matriz de precios donde las filas representan los tipos de reparaciones
@@ -170,16 +176,19 @@ public double descuentoMarca(ReparacionEntity reparacion, VehiculoEntity vehicul
     int anio = reparacion.getFechaHoraIngreso().getYear();
     LocalDateTime fechaReparacion = LocalDateTime.of(anio, mes, 1, 0, 0);
 
-    String url = "http://backend-marca-service/api/v1/marcas/" + marca;
-    // Hacer la solicitud para obtener la marca
-    ResponseEntity<MarcaEntity> responseEntity = restTemplate.exchange(
-            url,
-            HttpMethod.GET,
-            null,
-            new ParameterizedTypeReference<MarcaEntity>() {}
-    );
+    // String url = "http://backend-marca-service/api/v1/marcas/" + marca;
+    // // Hacer la solicitud para obtener la marca
+    // ResponseEntity<MarcaEntity> responseEntity = restTemplate.exchange(
+    //         url,
+    //         HttpMethod.GET,
+    //         null,
+    //         new ParameterizedTypeReference<MarcaEntity>() {}
+    // );
+
     // Obtener la marca del objeto recibido
-    MarcaEntity marcaEntity = responseEntity.getBody();
+    //string to long
+    Long marcaLong = Long.parseLong(marca);
+    MarcaEntity marcaEntity = marcaFeignClient.mostrarMarca(marcaLong).get();
     if (marcaEntity == null) {
         return 0;
     }
@@ -191,7 +200,7 @@ public double descuentoMarca(ReparacionEntity reparacion, VehiculoEntity vehicul
     //si bono es 1 o la cantidad de bonos es mayor a 0, se aplica el descuento
     if (bono == 1 || cantidadBonos > 0) {
         marcaEntity.setCantidadBonos(cantidadBonos - 1);
-        restTemplate.put(url, marcaEntity);
+        //restTemplate.put(url, marcaEntity);
         return marcaEntity.getDescuento();
     }
     return 0;
@@ -263,16 +272,17 @@ public double recargoAntiguedadVehiculo(ReparacionEntity reparacion, VehiculoEnt
 
     public String calcularPago(ReparacionEntity reparacion) {
         // Construir la URL para obtener el vehículo por ID
-        String url = "http://backend-vehiculo-service/api/v1/vehiculos/vehiculo" + reparacion.getIdVehiculo();
-        // Hacer la solicitud para obtener el vehículo
-        ResponseEntity<VehiculoEntity> responseEntity = restTemplate.exchange(
-                url,
-                HttpMethod.GET,
-                null,
-                new ParameterizedTypeReference<VehiculoEntity>() {}
-        );
+        // String url = "http://backend-vehiculo-service/api/v1/vehiculos/vehiculo" + reparacion.getIdVehiculo();
+        // // Hacer la solicitud para obtener el vehículo
+        // ResponseEntity<VehiculoEntity> responseEntity = restTemplate.exchange(
+        //         url,
+        //         HttpMethod.GET,
+        //         null,
+        //         new ParameterizedTypeReference<VehiculoEntity>() {}
+        // );
         // Obtener el tipo de motor del objeto recibido
-        VehiculoEntity vehiculo = responseEntity.getBody();
+        Long vehiculoLong = Long.parseLong(reparacion.getIdVehiculo());
+        VehiculoEntity vehiculo = vehiculoFeignClient.mostrarVehiculo(vehiculoLong).get();
 
         double montoBruto = precioReparacionVSMotor(reparacion, vehiculo);
         //guardar el montobruto en la reparacion
