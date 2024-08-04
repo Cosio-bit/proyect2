@@ -96,11 +96,11 @@ kubectl delete ConfigMap postgres-config-map
 
 kubectl delete Secret postgres-credentials
 
-kubectl delete deployments backend-config-deployment
-kubectl delete services backend-config-service
+kubectl delete deployments config-deployment
+kubectl delete services config-service
 
-kubectl delete deployments backend-eureka-deployment
-kubectl delete services backend-eureka-service
+kubectl delete deployments eureka-deployment
+kubectl delete services eureka-service
 
 kubectl delete deployments backend-gateway-deployment
 kubectl delete services backend-gateway-service
