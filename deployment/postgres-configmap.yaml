@@ -5,15 +5,15 @@ metadata:
   labels:
     app: postgres-config-map
 data:
-  DB_HOST_MARCA: backend-marca-db-service
+  DB_HOST_MARCA: marca-db-service
   DB_PORT_MARCA: "5432"
-  DB_DBNAME_MARCA: backend-marca-db
-  DB_HOST_PRECIO: backend-precio-db-service
+  DB_DBNAME_MARCA: marca-db
+  DB_HOST_PRECIO: precio-db-service
   DB_PORT_PRECIO: "5433"
-  DB_DBNAME_PRECIO: backend-precio-db
-  DB_HOST_REPARACION: backend-reparacion-db-service
+  DB_DBNAME_PRECIO: precio-db
+  DB_HOST_REPARACION: reparacion-db-service
   DB_PORT_REPARACION: "5434"
-  DB_DBNAME_REPARACION: backend-reparacion-db
-  DB_HOST_VEHICULO: backend-vehiculo-db-service
+  DB_DBNAME_REPARACION: reparacion-db
+  DB_HOST_VEHICULO: vehiculo-db-service
   DB_PORT_VEHICULO: "5435"
-  DB_DBNAME_VEHICULO: backend-vehiculo-db
+  DB_DBNAME_VEHICULO: vehiculo-db

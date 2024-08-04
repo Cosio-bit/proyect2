@@ -4,46 +4,46 @@ cd 'C:\Users\trevh\OneDrive\Escritorio\semestre 2-2023\proyect2'
 ls -l Dockerfile
 dos2unix Dockerfile
 
-cd backend-config-service
+cd config-server
 mvn clean install -DskipTests=True
-docker build -t cosiobit/backend-config-server .
-docker push cosiobit/backend-config-server
+docker build -t cosiobit/config-server .
+docker push cosiobit/config-server
 cd ../
 
-cd backend-eureka-service
+cd eureka-server
 mvn clean install -DskipTests=True
-docker build -t cosiobit/backend-eureka-server .
-docker push cosiobit/backend-eureka-server
+docker build -t cosiobit/eureka-server .
+docker push cosiobit/eureka-server
 cd ../
 
-cd backend-gateway-service
+cd gateway-server
 mvn clean install -DskipTests=True
-docker build -t cosiobit/backend-gateway-service .
-docker push cosiobit/backend-gateway-service
+docker build -t cosiobit/gateway-server .
+docker push cosiobit/gateway-server
 cd ../
 
-cd backend-marca-service
+cd marca
 mvn install -DskipTests=True
-docker build -t cosiobit/backend-marca-service .
-docker push cosiobit/backend-marca-service
+docker build -t cosiobit/marca .
+docker push cosiobit/marca
 cd ../
 
-cd backend-vehiculo-service
+cd vehiculo
 mvn install -DskipTests=True
-docker build -t cosiobit/backend-vehiculo-service .
-docker push cosiobit/backend-vehiculo-service
+docker build -t cosiobit/vehiculo .
+docker push cosiobit/vehiculo
 cd ../
 
-cd backend-precio-service
+cd precio
 mvn install -DskipTests=True
-docker build -t cosiobit/backend-precio-service .
-docker push cosiobit/backend-precio-service
+docker build -t cosiobit/precio .
+docker push cosiobit/precio
 cd ../
 
-cd backend-reparacion-service
+cd reparacion
 mvn install -DskipTests=True
-docker build -t cosiobit/backend-reparacion-service .
-docker push cosiobit/backend-reparacion-service
+docker build -t cosiobit/reparacion .
+docker push cosiobit/reparacion
 cd ../
 
 cd frontend-service
@@ -66,20 +66,20 @@ kubectl apply -f frontend-deployment-service.yaml
 kubectl apply -f postgres-secrets.yaml
 kubectl apply -f postgres-configmap.yaml
 
-kubectl apply -f backend-marca-db-deployment-service.yaml
-kubectl apply -f backend-vehiculo-db-deployment-service.yaml
-kubectl apply -f backend-precio-db-deployment-service.yaml
-kubectl apply -f backend-reparacion-db-deployment-service.yaml
+kubectl apply -f marca-db-deployment-service.yaml
+kubectl apply -f vehiculo-db-deployment-service.yaml
+kubectl apply -f precio-db-deployment-service.yaml
+kubectl apply -f reparacion-db-deployment-service.yaml
 
-kubectl apply -f backend-config-deployment-service.yaml
-kubectl apply -f backend-eureka-deployment-service.yaml
+kubectl apply -f config-deployment-service.yaml
+kubectl apply -f eureka-deployment-service.yaml
 
-kubectl apply -f backend-marca-deployment-service.yaml
-kubectl apply -f backend-vehiculo-deployment-service.yaml
-kubectl apply -f backend-precio-deployment-service.yaml
-kubectl apply -f backend-reparacion-deployment-service.yaml
+kubectl apply -f marca-deployment-service.yaml
+kubectl apply -f vehiculo-deployment-service.yaml
+kubectl apply -f precio-deployment-service.yaml
+kubectl apply -f reparacion-deployment-service.yaml
 
-kubectl apply -f backend-gateway-deployment-service.yaml
+kubectl apply -f gateway-deployment-service.yaml
 
 
 ---------------------------------------------------------
