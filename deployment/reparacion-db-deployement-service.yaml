@@ -58,12 +58,12 @@ spec:
               valueFrom:
                 secretKeyRef:
                   name: postgres-credentials
-                  key: DB_USER_ORDERS
+                  key: DB_USER_REPARACION
             - name: POSTGRES_PASSWORD
               valueFrom:
                 secretKeyRef:
                   name: postgres-credentials
-                  key: DB_PASSWORD_ORDERS
+                  key: DB_PASSWORD_REPARACION
           volumeMounts:
             - mountPath: /var/lib/postgresql/data
               name:  reparacion-data

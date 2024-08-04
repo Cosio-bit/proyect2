@@ -58,12 +58,12 @@ spec:
               valueFrom:
                 secretKeyRef:
                   name: postgres-credentials
-                  key: DB_USER_ORDERS
+                  key: DB_USER_MARCA
             - name: POSTGRES_PASSWORD
               valueFrom:
                 secretKeyRef:
                   name: postgres-credentials
-                  key: DB_PASSWORD_ORDERS
+                  key: DB_PASSWORD_MARCA
           volumeMounts:
             - mountPath: /var/lib/postgresql/data
               name:  precio-data
