@@ -66,10 +66,10 @@ kubectl apply -f frontend-deployment-service.yaml
 kubectl apply -f postgres-secrets.yaml
 kubectl apply -f postgres-configmap.yaml
 
-kubectl apply -f marca-db-deployment-service.yaml
-kubectl apply -f vehiculo-db-deployment-service.yaml
-kubectl apply -f precio-db-deployment-service.yaml
-kubectl apply -f reparacion-db-deployment-service.yaml
+kubectl apply -f marcadb-deployment-service.yaml
+kubectl apply -f vehiculodb-deployment-service.yaml
+kubectl apply -f preciodb-deployment-service.yaml
+kubectl apply -f reparaciondb-deployment-service.yaml
 
 kubectl apply -f config-server-deployment-service.yaml
 kubectl apply -f eureka-server-deployment-service.yaml

@@ -11,7 +11,6 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/v1/reparaciones")
-@CrossOrigin("*")
 public class ReparacionController {
 
     @Autowired

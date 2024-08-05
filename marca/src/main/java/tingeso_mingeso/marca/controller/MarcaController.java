@@ -12,7 +12,6 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/v1/marcas")
-@CrossOrigin("*")
 public class MarcaController {
 
     @Autowired

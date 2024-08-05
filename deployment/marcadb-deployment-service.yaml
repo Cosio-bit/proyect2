@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: marca-db-pv
+  name: marcadb-pv
   labels:
     type: local
 spec:
@@ -11,12 +11,12 @@ spec:
   accessModes:
     - ReadWriteOnce
   hostPath:
-    path: "/data/marca-db-data"
+    path: "/data/marcadb-data"
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: marca-db-pvc
+  name: marcadb-pvc
   labels:
     app: postgres
     tier: database
@@ -31,24 +31,24 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: marca-db-deployment
+  name: marcadb-deployment
   labels:
-    app: marca-db-deployment
+    app: marcadb-deployment
     tier: database
 spec:
   selector:
     matchLabels:
-      app: marca-db-deployment
+      app: marcadb-deployment
   strategy:
     type: Recreate
   template:
     metadata:
       labels:
-        app: marca-db-deployment
+        app: marcadb-deployment
         tier: database
     spec:
       containers:
-        - name: marca-db
+        - name: marcadb
           image: postgres
           imagePullPolicy: "IfNotPresent"
           ports:
@@ -66,18 +66,18 @@ spec:
                   key: DB_PASSWORD_MARCA
           volumeMounts:
             - mountPath: /var/lib/postgresql/data
-              name:  marca-data
+              name: marcadb-data # This should match the volume name below
       volumes:
-        - name: marca-db-data
+        - name: marcadb-data # This should match the volume mount name above
           persistentVolumeClaim:
-            claimName: marca-db-pvc
+            claimName: marcadb-pvc
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: marca-db-service
+  name: marcadb-service
   labels:
-    app: marca-db-service
+    app: marcadb-service
     tier: database
 spec:
   ports:
@@ -85,6 +85,6 @@ spec:
       targetPort: 5432
       protocol: TCP
   selector:
-    app: marca-db-deployment
+    app: marcadb-deployment
     tier: database
   type: LoadBalancer

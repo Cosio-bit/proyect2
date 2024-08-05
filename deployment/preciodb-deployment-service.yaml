@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: precio-db-pv
+  name: preciodb-pv
   labels:
     type: local
 spec:
@@ -11,12 +11,12 @@ spec:
   accessModes:
     - ReadWriteOnce
   hostPath:
-    path: "/data/precio-db-data"
+    path: "/data/preciodb-data"
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: precio-db-pvc
+  name: preciodb-pvc
   labels:
     app: postgres
     tier: database
@@ -31,24 +31,24 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: precio-db-deployment
+  name: preciodb-deployment
   labels:
-    app: precio-db-deployment
+    app: preciodb-deployment
     tier: database
 spec:
   selector:
     matchLabels:
-      app: precio-db-deployment
+      app: preciodb-deployment
   strategy:
     type: Recreate
   template:
     metadata:
       labels:
-        app: precio-db-deployment
+        app: preciodb-deployment
         tier: database
     spec:
       containers:
-        - name: precio-db
+        - name: preciodb
           image: postgres
           imagePullPolicy: "IfNotPresent"
           ports:
@@ -58,26 +58,26 @@ spec:
               valueFrom:
                 secretKeyRef:
                   name: postgres-credentials
-                  key: DB_USER_MARCA
+                  key: DB_USER_PRECIO
             - name: POSTGRES_PASSWORD
               valueFrom:
                 secretKeyRef:
                   name: postgres-credentials
-                  key: DB_PASSWORD_MARCA
+                  key: DB_PASSWORD_PRECIO
           volumeMounts:
             - mountPath: /var/lib/postgresql/data
-              name:  precio-data
+              name: preciodb-data # This should match the volume name below
       volumes:
-        - name: precio-db-data
+        - name: preciodb-data # This should match the volume mount name above
           persistentVolumeClaim:
-            claimName: precio-db-pvc
+            claimName: preciodb-pvc
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: precio-db-service
+  name: preciodb-service
   labels:
-    app: precio-db-service
+    app: preciodb-service
     tier: database
 spec:
   ports:
@@ -85,7 +85,6 @@ spec:
       targetPort: 5432
       protocol: TCP
   selector:
-    app: precio-db-deployment
+    app: preciodb-deployment
     tier: database
   type: LoadBalancer
-  

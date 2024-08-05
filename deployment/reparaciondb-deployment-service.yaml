@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: vehiculo-db-pv
+  name: reparaciondb-pv
   labels:
     type: local
 spec:
@@ -11,12 +11,12 @@ spec:
   accessModes:
     - ReadWriteOnce
   hostPath:
-    path: "/data/vehiculo-db-data"
+    path: "/data/reparaciondb-data"
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: vehiculo-db-pvc
+  name: reparaciondb-pvc
   labels:
     app: postgres
     tier: database
@@ -31,24 +31,24 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: vehiculo-db-deployment
+  name: reparaciondb-deployment
   labels:
-    app: vehiculo-db-deployment
+    app: reparaciondb-deployment
     tier: database
 spec:
   selector:
     matchLabels:
-      app: vehiculo-db-deployment
+      app: reparaciondb-deployment
   strategy:
     type: Recreate
   template:
     metadata:
       labels:
-        app: vehiculo-db-deployment
+        app: reparaciondb-deployment
         tier: database
     spec:
       containers:
-        - name: vehiculo-db
+        - name: reparaciondb
           image: postgres
           imagePullPolicy: "IfNotPresent"
           ports:
@@ -58,34 +58,33 @@ spec:
               valueFrom:
                 secretKeyRef:
                   name: postgres-credentials
-                  key: DB_USER_VEHICULO
+                  key: DB_USER_REPARACION
             - name: POSTGRES_PASSWORD
               valueFrom:
                 secretKeyRef:
                   name: postgres-credentials
-                  key: DB_PASSWORD_VEHICULO
+                  key: DB_PASSWORD_REPARACION
           volumeMounts:
             - mountPath: /var/lib/postgresql/data
-              name:  vehiculo-data
+              name: reparaciondb-data # This should match the volume name below
       volumes:
-        - name: vehiculo-db-data
+        - name: reparaciondb-data # This should match the volume mount name above
           persistentVolumeClaim:
-            claimName: vehiculo-db-pvc
+            claimName: reparaciondb-pvc
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: vehiculo-db-service
+  name: reparaciondb-service
   labels:
-    app: vehiculo-db-service
+    app: reparaciondb-service
     tier: database
 spec:
   ports:
-    - port: 5435
+    - port: 5434
       targetPort: 5432
       protocol: TCP
   selector:
-    app: vehiculo-db-deployment
+    app: reparaciondb-deployment
     tier: database
   type: LoadBalancer
-  
