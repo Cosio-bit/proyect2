@@ -24,16 +24,16 @@ spring:
         - id: marca
           uri: lb://marca
           predicates:
-            - Path=/marcas/**
+            - Path=/api/v1/marcas/**
         - id: reparacion
           uri: lb://reparacion
           predicates:
-            - Path=/reparaciones/**
+            - Path=/api/v1/reparaciones/**
         - id: vehiculo
           uri: lb://vehiculo
           predicates:
-            - Path=/vehiculos/**
+            - Path=/api/v1/vehiculos/**
         - id: precio
           uri: lb://precio
           predicates:
-            - Path=/precios/**
+            - Path=/api/v1/precios/**

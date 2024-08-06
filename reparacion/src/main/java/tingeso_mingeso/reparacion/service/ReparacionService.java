@@ -1,11 +1,7 @@
 package tingeso_mingeso.reparacion.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.ParameterizedTypeReference;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.ResponseEntity;
+
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
 
 import tingeso_mingeso.reparacion.clients.MarcaFeignClient;
 import tingeso_mingeso.reparacion.clients.VehiculoFeignClient;
@@ -23,14 +19,10 @@ import java.util.Comparator;
 @Service
 public class ReparacionService {
 
-    @Autowired
-    private RestTemplate restTemplate;
 
-    @Autowired
-    private ReparacionRepository reparacionRepository;
+    ReparacionRepository reparacionRepository;
 
-    @Autowired
-    private PagoService pagoService;
+    PagoService pagoService;
 
     MarcaFeignClient  marcaFeignClient;
     VehiculoFeignClient vehiculoFeignClient;

@@ -1,7 +1,5 @@
 package tingeso_mingeso.reparacion.service;
 
-import lombok.Data;
-import org.springframework.core.ParameterizedTypeReference;
 
 import tingeso_mingeso.reparacion.clients.MarcaFeignClient;
 import tingeso_mingeso.reparacion.clients.VehiculoFeignClient;
@@ -9,28 +7,17 @@ import tingeso_mingeso.reparacion.entity.ReparacionEntity;
 import tingeso_mingeso.reparacion.model.MarcaEntity;
 import tingeso_mingeso.reparacion.model.VehiculoEntity;
 import tingeso_mingeso.reparacion.repository.ReparacionRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.util.Pair;
-import org.springframework.web.client.RestTemplate;
-import org.springframework.http.ResponseEntity;
-import org.springframework.http.HttpMethod;
 
 
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.time.Period;
-import java.util.ArrayList;
 
-@Data
 @Service
 public class PagoService {
 
-    @Autowired
     ReparacionRepository reparacionRepository;
-    @Autowired
-    RestTemplate restTemplate;
-
     MarcaFeignClient marcaFeignClient;
     VehiculoFeignClient vehiculoFeignClient;
 

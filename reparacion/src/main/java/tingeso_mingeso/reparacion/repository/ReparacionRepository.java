@@ -7,10 +7,8 @@ import org.springframework.stereotype.Repository;
 import tingeso_mingeso.reparacion.entity.ReparacionEntity;
 
 
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
-import java.util.function.Function;
 
 @Repository
 public interface ReparacionRepository extends JpaRepository<ReparacionEntity, Long> {
